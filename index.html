@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dheer Patel — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Cursor -->
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
+  <div id="spotlight"></div>
+
+  <!-- Background orbs -->
+  <div class="bg-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <span class="nav-logo">DP</span>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#achievements">Achievements</a></li>
+        <li><a href="#contact" class="nav-cta">Contact</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-content">
+      <p class="hero-eyebrow">Systems Engineer &amp; Inventor</p>
+      <h1>Dheer<br /><span class="accent">Patel</span></h1>
+      <p class="hero-sub">
+        Founder of INHALYZE · UIUC Grainger · Dean's List · James Scholar
+      </p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary">View My Work</a>
+        <a href="#contact" class="btn btn-outline">Get in Touch</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card">
+        <img src="Assets/94f0904a-777b-4706-8f3f-f5821c63ff45.png" alt="INHALYZE logo" class="hero-logo" />
+        <div class="hero-card-text">
+          <strong>INHALYZE</strong>
+          <span>Smart Inhaler · IRIS National Fair Finalist</span>
+        </div>
+      </div>
+      <div class="hero-stat-grid">
+        <div class="stat-card"><span class="stat-num">750K+</span><span class="stat-label">Students Reached</span></div>
+        <div class="stat-card"><span class="stat-num">$21.6K</span><span class="stat-label">Funds Raised</span></div>
+        <div class="stat-card"><span class="stat-num">3</span><span class="stat-label">Robotics Labs Built</span></div>
+        <div class="stat-card"><span class="stat-num">SAT 1460</span><span class="stat-label">Math 730 · ERW 730</span></div>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">About</span>
+        <h2>Builder. Researcher. Leader.</h2>
+      </div>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            I'm a Systems Engineering &amp; Design student at the <strong>University of Illinois Urbana-Champaign</strong>,
+            passionate about solving real-world problems at the intersection of engineering, technology, and healthcare.
+          </p>
+          <p>
+            My flagship project, <strong>INHALYZE</strong>, is a smart inhaler prototype engineered to improve
+            respiratory health management for Asthma and COPD patients — selected as a finalist at India's
+            prestigious IRIS National Fair.
+          </p>
+          <p>
+            Beyond building products, I've led robotics education initiatives reaching hundreds of thousands
+            of students, published engineering research, and mentored peers from underserved communities.
+          </p>
+          <div class="about-tags">
+            <span>Systems Engineering</span>
+            <span>Product Design</span>
+            <span>Medical Devices</span>
+            <span>Robotics</span>
+            <span>Research</span>
+            <span>Education Outreach</span>
+          </div>
+        </div>
+        <div class="about-edu">
+          <h3>Education</h3>
+          <div class="edu-item">
+            <div class="edu-icon uiuc-icon">I</div>
+            <div>
+              <strong>University of Illinois Urbana-Champaign</strong>
+              <span>BS, Systems Engineering &amp; Design · 2025–2029</span>
+              <span class="edu-note">Dean's List · James Scholar · Grainger College</span>
+            </div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-icon jnis-icon">JN</div>
+            <div>
+              <strong>Jamnabai Narsee International School</strong>
+              <span>International Baccalaureate · 2023–2025</span>
+            </div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-icon jn-icon">JN</div>
+            <div>
+              <strong>Jamnabai Narsee School</strong>
+              <span>Grade 11 &amp; 12 · 2013–2023</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Projects</span>
+        <h2>Innovations &amp; Research</h2>
+      </div>
+      <div class="projects-grid">
+
+        <div class="project-card project-featured">
+          <div class="project-img-wrap">
+            <img src="Assets/94f0904a-777b-4706-8f3f-f5821c63ff45.png" alt="INHALYZE" />
+          </div>
+          <div class="project-body">
+            <div class="project-meta">
+              <span class="project-tag">Healthcare · IoT</span>
+              <span class="project-year">2024 – Present</span>
+            </div>
+            <h3>INHALYZE — Smart Inhaler</h3>
+            <p>
+              Researched, designed, and developed a smart inhaler prototype engineered to improve
+              respiratory health management for Asthma and COPD patients. Selected as a <strong>Finalist
+              at The IRIS National Fair</strong>, one of India's most prestigious science and innovation competitions.
+            </p>
+            <ul class="project-bullets">
+              <li>Innovative solutions for improved respiratory health management</li>
+              <li>Real-time monitoring and data-driven insights for patients</li>
+              <li>Making respiratory care smarter, more accessible, and more effective</li>
+            </ul>
+            <div class="project-skills">
+              <span>Product Design</span>
+              <span>Prototyping</span>
+              <span>R&amp;D</span>
+              <span>Healthcare Tech</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-body">
+            <div class="project-meta">
+              <span class="project-tag">Robotics · Safety</span>
+              <span class="project-year">2022</span>
+            </div>
+            <h3>Autonomous Safety Braking System</h3>
+            <p>
+              Developed an autonomous safety braking mechanism for bicycles to prevent collisions,
+              utilizing sensor data for enhanced safety.
+            </p>
+            <ul class="project-bullets">
+              <li>Published research paper in NAIRJC (North Asian International Research Journal)</li>
+              <li>Sensor-fusion approach using real-time obstacle detection</li>
+            </ul>
+            <div class="project-skills">
+              <span>Embedded Systems</span>
+              <span>Sensor Fusion</span>
+              <span>Published Research</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-body">
+            <div class="project-meta">
+              <span class="project-tag">Community · Education</span>
+              <span class="project-year">2023–24</span>
+            </div>
+            <h3>S.E.N.S.E Community Project</h3>
+            <p>
+              Founded and executed a community initiative focused on STEM education and robotics outreach,
+              setting up three robotics labs in underserved schools and engaging over 750,000 students.
+            </p>
+            <ul class="project-bullets">
+              <li>Mentored 15,000+ students across underserved communities</li>
+              <li>Raised $21,600 from corporate sponsors</li>
+              <li>Enabled 2,500+ students to engage in robotics education</li>
+            </ul>
+            <div class="project-skills">
+              <span>Leadership</span>
+              <span>STEM Outreach</span>
+              <span>Community Building</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Experience</span>
+        <h2>Professional Journey</h2>
+      </div>
+      <div class="timeline">
+
+        <div class="timeline-item">
+          <div class="tl-dot"></div>
+          <div class="tl-content">
+            <div class="tl-header">
+              <div>
+                <h3>Onsite Consultant</h3>
+                <span class="tl-org">University of Illinois Urbana-Champaign</span>
+              </div>
+              <span class="tl-date">May 2026 – Present</span>
+            </div>
+            <ul>
+              <li>Providing hands-on technical support to UIUC faculty, staff, students, and retirees</li>
+              <li>Troubleshooting and repairing computer hardware and software issues</li>
+              <li>Performing home networking setup and configuration, disk and file restoration, virus removal</li>
+              <li>Working within departmental units on system and network administration tasks</li>
+            </ul>
+            <div class="tl-tags"><span>Onsite Management</span><span>IT Support</span></div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="tl-dot"></div>
+          <div class="tl-content">
+            <div class="tl-header">
+              <div>
+                <h3>Inventor &amp; Developer</h3>
+                <span class="tl-org">INHALYZE · Self-employed</span>
+              </div>
+              <span class="tl-date">Jan 2024 – Present</span>
+            </div>
+            <ul>
+              <li>Researching, designing, and developing a smart inhaler prototype for Asthma and COPD patients</li>
+              <li>Working toward making respiratory care smarter, more accessible, and more effective</li>
+              <li>Selected as a Finalist to present INHALYZE at The IRIS National Fair</li>
+            </ul>
+            <div class="tl-tags"><span>Product Design</span><span>Prototyping</span><span>R&amp;D</span></div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="tl-dot"></div>
+          <div class="tl-content">
+            <div class="tl-header">
+              <div>
+                <h3>Systems Engineering Intern</h3>
+                <span class="tl-org">Image Gravures · Ahmedabad, India</span>
+              </div>
+              <span class="tl-date">Jul 2024 · 1 month</span>
+            </div>
+            <ul>
+              <li>Studied the full manufacturing workflow — job card creation, CNC machining to electroplating (Nickel &amp; Copper), laser engraving, and chromium finishing</li>
+              <li>Applied mechanical engineering principles through hands-on component assembly, quality inspection, and process monitoring</li>
+              <li>Observed real-world quality control practices including dimensional checks, adhesion testing, and print proofing</li>
+              <li>Prepared and presented a comprehensive project report with findings and optimization suggestions</li>
+            </ul>
+            <div class="tl-tags"><span>Manufacturing</span><span>Quality Control</span><span>Process Optimization</span></div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="tl-dot"></div>
+          <div class="tl-content">
+            <div class="tl-header">
+              <div>
+                <h3>Mechanical Engineering Intern</h3>
+                <span class="tl-org">D. Parikh Engineering Works · Mumbai, India</span>
+              </div>
+              <span class="tl-date">Jun 2024 – Jul 2024 · 2 months</span>
+            </div>
+            <ul>
+              <li>Interned at India's leading ISO 9001 certified manufacturer of basket centrifuges, established in 1948</li>
+              <li>Conducted detailed analysis of the full centrifuge manufacturing process — spanning design &amp; engineering, raw material sourcing, cutting &amp; fabrication, welding, machining, assembly &amp; testing</li>
+              <li>Gained hands-on experience assembling centrifuge components and ensuring quality control</li>
+              <li>Authored and presented a comprehensive research paper titled "Manufacturing of Industrial Pharmaceutical Centrifuges"</li>
+            </ul>
+            <div class="tl-tags"><span>Manufacturing Engineering</span><span>Quality Assurance</span><span>Published Research</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ACHIEVEMENTS -->
+  <section id="achievements">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Achievements</span>
+        <h2>Honors &amp; Recognition</h2>
+      </div>
+      <div class="ach-grid">
+
+        <div class="ach-block">
+          <div class="ach-icon">🎓</div>
+          <h3>Academic Honors</h3>
+          <ul>
+            <li><div class="ach-row"><strong>Dean's List</strong><span class="ach-year">2026</span></div><span class="ach-desc">Grainger College of Engineering, UIUC</span></li>
+            <li><div class="ach-row"><strong>James Scholar</strong><span class="ach-year">2026</span></div><span class="ach-desc">University of Illinois Urbana-Champaign</span></li>
+            <li><div class="ach-row"><strong>HKIMO Gold Award</strong><span class="ach-year">2024</span></div><span class="ach-desc">Hong Kong International Math Olympiad</span></li>
+            <li><div class="ach-row"><strong>HKIMO Finals Bronze</strong><span class="ach-year">2023</span></div><span class="ach-desc">Hong Kong International Math Olympiad Finals</span></li>
+            <li><div class="ach-row"><strong>SAT 1460</strong><span class="ach-year">2024</span></div><span class="ach-desc">Math: 730 · ERW: 730</span></li>
+            <li><div class="ach-row"><strong>AP Computer Science A</strong><span class="ach-year">2022</span></div><span class="ach-desc">Score: 5</span></li>
+          </ul>
+        </div>
+
+        <div class="ach-block">
+          <div class="ach-icon">🤖</div>
+          <h3>Robotics</h3>
+          <ul>
+            <li><div class="ach-row"><strong>FRC Worlds Rookie All Star Award</strong><span class="ach-year">2024</span></div></li>
+            <li><div class="ach-row"><strong>FRC Nationals Finalist &amp; Alliance Captain</strong><span class="ach-year">2024</span></div></li>
+            <li><div class="ach-row"><strong>FRC Regionals Excellence in Engineering Award</strong><span class="ach-year">2024</span></div></li>
+            <li><div class="ach-row"><strong>FRC Regionals Rookie All Star Award</strong><span class="ach-year">2024</span></div></li>
+            <li><div class="ach-row"><strong>FTC Nationals Connect Award</strong><span class="ach-year">2023</span></div></li>
+            <li><div class="ach-row"><strong>FTC Internationals Robot Game Semi-Finalist</strong><span class="ach-year">2023</span></div></li>
+            <li><div class="ach-row"><strong>FTC Internationals Judges Choice Award</strong><span class="ach-year">2023</span></div></li>
+            <li><div class="ach-row"><strong>Dean's List Semi-Finalist (FTC)</strong><span class="ach-year">2023</span></div></li>
+            <li><div class="ach-row"><strong>World Robotics Olympiad</strong><span class="ach-year">2022</span></div><span class="ach-desc">National Rank 3</span></li>
+          </ul>
+        </div>
+
+        <div class="ach-block">
+          <div class="ach-icon">🏛️</div>
+          <h3>Leadership</h3>
+          <ul>
+            <li><div class="ach-row"><strong>Head Boy</strong><span class="ach-year">2022</span></div><span class="ach-desc">Grade 10 Student Council</span></li>
+            <li><div class="ach-row"><strong>Head Captain</strong><span class="ach-year">2024</span></div><span class="ach-desc">Grade 12 Student Council</span></li>
+            <li><div class="ach-row"><strong>Jamnabai Adolescent Mentor</strong><span class="ach-year">2024</span></div><span class="ach-desc">JAM Member, Grade 11 &amp; 12</span></li>
+            <li><div class="ach-row"><strong>Founder &amp; Executor</strong><span class="ach-year">2023–24</span></div><span class="ach-desc">S.E.N.S.E Community Project</span></li>
+            <li><div class="ach-row"><strong>Coding &amp; Robotics Workshops</strong></div><span class="ach-desc">20+ students with Autism &amp; Down Syndrome</span></li>
+            <li><div class="ach-row"><strong>Mentored 200+ Students</strong></div><span class="ach-desc">From disadvantaged backgrounds</span></li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Contact</span>
+        <h2>Let's Connect</h2>
+        <p class="section-sub">I'm always open to new opportunities, collaborations, and conversations.</p>
+      </div>
+      <div class="contact-grid">
+        <a href="mailto:dheervpatel@gmail.com" class="contact-card">
+          <div class="contact-icon">✉</div>
+          <div>
+            <strong>Email</strong>
+            <span>dheervpatel@gmail.com</span>
+          </div>
+        </a>
+        <a href="https://www.linkedin.com/in/dheer-patel-uiuc" target="_blank" rel="noopener" class="contact-card">
+          <div class="contact-icon">in</div>
+          <div>
+            <strong>LinkedIn</strong>
+            <span>linkedin.com/in/dheer-patel-uiuc</span>
+          </div>
+        </a>
+        <a href="tel:+919804079709" class="contact-card">
+          <div class="contact-icon">☎</div>
+          <div>
+            <strong>Phone</strong>
+            <span>+91 9804 079 709</span>
+          </div>
+        </a>
+        <div class="contact-card contact-location">
+          <div class="contact-icon">📍</div>
+          <div>
+            <strong>Location</strong>
+            <span>Urbana, Illinois, USA</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-inner">
+      <span>© 2026 Dheer Patel</span>
+      <span>Systems Engineering &amp; Design · UIUC</span>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
