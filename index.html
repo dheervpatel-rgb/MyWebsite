@@ -629,6 +629,11 @@
     .mob-overlay.open { display: flex; }
     .mob-overlay a { font-family: 'DM Serif Display', serif; font-size: 2.2rem; letter-spacing: -0.02em; }
 
+    @media (pointer: coarse) {
+      #cursor, #cursor-ring { display: none !important; }
+      body { cursor: auto; }
+    }
+
     @media (max-width: 960px) {
       #sidebar { display: none; }
       #mob-bar { display: flex; }
