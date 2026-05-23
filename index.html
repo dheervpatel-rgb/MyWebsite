@@ -87,9 +87,9 @@
     }
     .s-role {
       font-family: 'DM Mono', monospace;
-      font-size: 0.6rem;
+      font-size: 0.7rem;
       color: var(--muted);
-      letter-spacing: 0.08em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
       margin-bottom: 52px;
     }
@@ -97,9 +97,9 @@
     .s-nav { display: flex; flex-direction: column; gap: 2px; flex: 1; }
     .s-nav a {
       font-family: 'DM Mono', monospace;
-      font-size: 0.68rem;
+      font-size: 0.76rem;
       color: var(--muted);
-      letter-spacing: 0.08em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
       padding: 8px 0;
       display: flex; align-items: center; gap: 10px;
@@ -119,9 +119,9 @@
     .s-footer { display: flex; flex-direction: column; gap: 10px; }
     .s-footer a {
       font-family: 'DM Mono', monospace;
-      font-size: 0.58rem;
+      font-size: 0.68rem;
       color: var(--muted);
-      letter-spacing: 0.05em;
+      letter-spacing: 0.04em;
       transition: color .2s;
     }
     .s-footer a:hover { color: var(--orange); }
@@ -133,9 +133,9 @@
     /* ── Section label ── */
     .sec-label {
       font-family: 'DM Mono', monospace;
-      font-size: 0.6rem;
+      font-size: 0.72rem;
       color: var(--orange);
-      letter-spacing: 0.14em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       margin-bottom: 28px;
       display: flex; align-items: center; gap: 10px;
@@ -158,16 +158,16 @@
       grid-template-columns: 1fr 380px;
       gap: 64px;
       align-items: center;
-      margin-bottom: 72px;
+      margin-bottom: 48px;
     }
 
     .hero-eyebrow {
       font-family: 'DM Mono', monospace;
-      font-size: 0.65rem;
+      font-size: 0.75rem;
       color: var(--muted);
-      letter-spacing: 0.1em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      margin-bottom: 28px;
+      margin-bottom: 16px;
       display: flex; align-items: center; gap: 10px;
     }
     .hero-eyebrow::before { content: ''; width: 20px; height: 1px; background: var(--orange); }
@@ -177,7 +177,7 @@
       font-size: clamp(60px, 7.5vw, 100px);
       line-height: 0.92;
       letter-spacing: -0.03em;
-      margin-bottom: 28px;
+      margin-bottom: 20px;
     }
     .hero-name .line2 {
       display: block;
@@ -190,7 +190,7 @@
     .hero-descriptor {
       font-size: 1rem;
       color: var(--muted);
-      margin-bottom: 44px;
+      margin-bottom: 24px;
       line-height: 1.7;
       max-width: 480px;
     }
@@ -213,6 +213,29 @@
       transition: border-color .2s, color .2s;
     }
     .chip:hover { border-color: var(--orange); color: var(--text); }
+
+    .hero-roles {
+      display: flex; flex-direction: column; gap: 10px;
+      margin-bottom: 28px;
+    }
+    .hero-role {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .role-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--orange); flex-shrink: 0;
+      box-shadow: 0 0 6px var(--orange-glow);
+    }
+    .role-title {
+      display: block;
+      font-size: 0.88rem; font-weight: 500; color: var(--text);
+    }
+    .role-org {
+      display: block;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem; color: var(--muted);
+      letter-spacing: 0.03em; margin-top: 1px;
+    }
 
     .hero-ctas { display: flex; gap: 14px; align-items: center; }
     .btn-primary {
@@ -237,6 +260,18 @@
     }
     .btn-ghost:hover { color: var(--text); }
     .btn-ghost::after { content: '↓'; }
+    .btn-resume {
+      padding: 11px 24px;
+      border: 1px solid var(--glass-b);
+      border-radius: 100px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.06em;
+      color: var(--text);
+      background: var(--glass);
+      transition: border-color .2s, background .2s;
+    }
+    .btn-resume:hover { border-color: var(--orange); background: rgba(255,95,5,0.08); }
 
     /* Hero right — portrait */
     .hero-portrait {
@@ -257,105 +292,100 @@
       position: absolute; inset: 0;
       background: linear-gradient(to top, rgba(6,11,20,0.72) 0%, transparent 50%);
     }
-    .hero-portrait-card {
-      position: absolute; bottom: 20px; left: 20px; right: 20px;
-      z-index: 2;
-      display: flex; align-items: center; gap: 12px;
-      background: rgba(6,11,20,0.7);
-      backdrop-filter: blur(16px);
-      border: 1px solid var(--glass-b);
-      border-radius: 12px;
-      padding: 12px 16px;
+
+    /* INHALYZE header row */
+    .hi-header {
+      margin-bottom: 14px;
     }
-    .hpc-logo {
-      width: 40px; height: 40px; border-radius: 9px;
-      overflow: hidden; flex-shrink: 0;
-      border: 1px solid var(--glass-b);
-    }
-    .hpc-logo img { width: 100%; height: 100%; object-fit: cover; }
-    .hpc-name {
-      font-size: 0.88rem; font-weight: 500;
-      margin-bottom: 2px;
-    }
-    .hpc-sub {
+    .hi-header-label {
       font-family: 'DM Mono', monospace;
-      font-size: 0.58rem; color: var(--orange);
-      letter-spacing: 0.05em;
+      font-size: 0.72rem; color: var(--orange);
+      letter-spacing: 0.1em; text-transform: uppercase;
+      display: flex; align-items: center; gap: 10px;
     }
+    .hi-header-label::after { content: ''; flex: 0 0 32px; height: 1px; background: var(--orange); opacity: .4; }
 
     /* Hero bottom — INHALYZE feature */
     .hero-inhalyze {
-      display: grid;
-      grid-template-columns: auto 1fr auto;
-      gap: 32px;
-      align-items: center;
+      display: flex; flex-direction: column; gap: 20px;
       background: var(--glass);
       border: 1px solid var(--glass-b);
       border-radius: var(--radius);
-      padding: 24px 32px;
+      padding: 28px 32px;
       backdrop-filter: blur(16px);
-      position: relative;
-      overflow: hidden;
+      position: relative; overflow: hidden;
     }
     .hero-inhalyze::before {
       content: '';
-      position: absolute; top: -60%; left: -10%;
-      width: 300px; height: 300px; border-radius: 50%;
+      position: absolute; top: -60%; left: -5%;
+      width: 320px; height: 320px; border-radius: 50%;
       background: var(--orange-glow);
-      filter: blur(60px);
-      pointer-events: none;
+      filter: blur(70px); pointer-events: none;
     }
-    .hi-left {
-      display: flex; align-items: center; gap: 14px;
-      flex-shrink: 0;
+    .hi-top {
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 24px;
+    }
+    .hi-identity {
+      display: flex; align-items: center; gap: 16px;
     }
     .hi-logo {
-      width: 48px; height: 48px; border-radius: 11px;
+      width: 52px; height: 52px; border-radius: 12px;
       overflow: hidden; flex-shrink: 0;
       border: 1px solid var(--glass-b);
     }
     .hi-logo img { width: 100%; height: 100%; object-fit: cover; }
     .hi-name {
       font-family: 'DM Serif Display', serif;
-      font-size: 1.1rem; letter-spacing: -0.01em;
+      font-size: 1.2rem; letter-spacing: -0.01em;
+      margin-bottom: 4px;
     }
     .hi-tag {
       font-family: 'DM Mono', monospace;
-      font-size: 0.58rem; color: var(--orange);
-      letter-spacing: 0.06em; text-transform: uppercase;
-      margin-top: 2px;
+      font-size: 0.68rem; color: var(--muted);
+      letter-spacing: 0.05em; text-transform: uppercase;
     }
-    .hi-desc {
-      font-size: 0.83rem; color: var(--muted);
-      line-height: 1.65;
-      border-left: 1px solid var(--border);
-      padding-left: 32px;
+    .hi-badges {
+      display: flex; align-items: center; gap: 8px; flex-shrink: 0;
     }
-    .hi-stats {
-      display: flex; align-items: center; gap: 28px;
-      flex-shrink: 0;
-      border-left: 1px solid var(--border);
-      padding-left: 32px;
-    }
-    .hi-stat span:first-child {
-      display: block;
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.3rem; letter-spacing: -0.02em;
-    }
-    .hi-stat span:last-child {
+    .hi-stage {
       font-family: 'DM Mono', monospace;
-      font-size: 0.55rem; color: var(--muted);
-      letter-spacing: 0.06em; text-transform: uppercase;
+      font-size: 0.68rem; color: var(--accent2);
+      letter-spacing: 0.05em; text-transform: uppercase;
+      padding: 6px 14px;
+      background: rgba(74,158,255,0.08);
+      border: 1px solid rgba(74,158,255,0.2);
+      border-radius: 100px; white-space: nowrap;
     }
     .hi-badge {
       font-family: 'DM Mono', monospace;
-      font-size: 0.58rem; color: var(--orange);
-      letter-spacing: 0.06em; text-transform: uppercase;
+      font-size: 0.68rem; color: var(--orange);
+      letter-spacing: 0.05em; text-transform: uppercase;
       padding: 6px 14px;
       background: rgba(255,95,5,0.1);
       border: 1px solid rgba(255,95,5,0.22);
-      border-radius: 100px;
-      white-space: nowrap;
+      border-radius: 100px; white-space: nowrap;
+    }
+    .hi-content {
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+    }
+    .hi-desc {
+      font-size: 0.9rem; color: var(--muted);
+      line-height: 1.75;
+    }
+    .hi-bullets {
+      display: flex; flex-direction: column; gap: 12px;
+      padding-left: 0;
+    }
+    .hi-bullets li {
+      font-size: 0.88rem; color: var(--muted);
+      line-height: 1.6; padding-left: 16px; position: relative;
+    }
+    .hi-bullets li::before {
+      content: '—'; position: absolute; left: 0;
+      color: var(--orange); font-size: 0.7rem;
     }
 
     /* ══════════════════════════════════════
@@ -407,10 +437,20 @@
       border-radius: var(--radius);
       border-left: 2px solid transparent;
       transition: border-color .25s, background .25s;
+      display: flex; align-items: flex-start; gap: 16px;
     }
+    .edu-logo {
+      width: 52px; height: 52px; border-radius: 10px;
+      overflow: hidden; flex-shrink: 0;
+      background: transparent;
+      display: flex; align-items: center; justify-content: center;
+      align-self: center;
+    }
+    .edu-logo img { width: 100%; height: 100%; object-fit: contain; }
+    .edu-card-body { flex: 1; }
     .edu-card:hover { border-left-color: var(--orange); background: rgba(255,95,5,0.04); }
-    .edu-card strong { display: block; font-size: 0.9rem; font-weight: 500; margin-bottom: 4px; }
-    .edu-card span {
+    .edu-card-body strong { display: block; font-size: 0.9rem; font-weight: 500; margin-bottom: 4px; }
+    .edu-card-body > span {
       display: block;
       font-family: 'DM Mono', monospace;
       font-size: 0.6rem;
@@ -418,9 +458,12 @@
       letter-spacing: 0.04em;
       line-height: 1.7;
     }
-    .edu-card .edu-honor {
-      display: inline-flex; align-items: center; gap: 4px;
+    .edu-honors {
+      display: flex; flex-wrap: wrap; gap: 6px;
       margin-top: 8px;
+    }
+    .edu-honor {
+      display: inline-flex; align-items: center; gap: 4px;
       padding: 3px 8px;
       background: rgba(255,179,71,0.1);
       border: 1px solid rgba(255,179,71,0.2);
@@ -670,9 +713,8 @@
       footer { padding: 24px; }
       .hero-top { grid-template-columns: 1fr; }
       .hero-portrait { height: 340px; }
-      .hero-inhalyze { grid-template-columns: 1fr; gap: 16px; }
-      .hi-desc { border-left: none; padding-left: 0; border-top: 1px solid var(--border); padding-top: 16px; }
-      .hi-stats { border-left: none; padding-left: 0; border-top: 1px solid var(--border); padding-top: 16px; }
+      .hi-top { flex-wrap: wrap; }
+      .hi-content { grid-template-columns: 1fr; }
       .about-grid { grid-template-columns: 1fr; gap: 40px; }
       .ach-cols { grid-template-columns: 1fr; gap: 32px; }
       .exp-row { grid-template-columns: 1fr; gap: 6px; }
@@ -730,18 +772,33 @@
     <section id="hero">
       <div class="hero-top">
         <div>
-          <p class="hero-eyebrow">Systems Engineer &amp; Inventor · Urbana, Illinois</p>
+          <p class="hero-eyebrow">Systems Engineer &amp; Entrepreneur · Urbana, Illinois</p>
           <h1 class="hero-name">
             Dheer<br />
             <span class="line2">Patel.</span>
           </h1>
           <p class="hero-descriptor">
-            <strong>BS, Systems Engineering &amp; Design @ UIUC</strong> — Dean's List, James Scholar.<br />
-            Founder of <strong>INHALYZE</strong>, a smart inhaler for Asthma &amp; COPD patients.
-            I build things that sit at the intersection of engineering, healthcare, and community.
+            <strong>BS, Systems Engineering &amp; Design @ UIUC</strong> — Dean's List, James Scholar.
           </p>
-<div class="hero-ctas">
+          <div class="hero-roles">
+            <div class="hero-role">
+              <span class="role-dot"></span>
+              <div>
+                <span class="role-title">Inventor &amp; Developer</span>
+                <span class="role-org">INHALYZE · Self-employed · Jan 2024 – Present</span>
+              </div>
+            </div>
+            <div class="hero-role">
+              <span class="role-dot"></span>
+              <div>
+                <span class="role-title">Onsite Consultant</span>
+                <span class="role-org">University of Illinois Urbana-Champaign · May 2026 – Present</span>
+              </div>
+            </div>
+          </div>
+          <div class="hero-ctas">
             <a href="#projects" class="btn-primary">See My Work</a>
+            <a href="Assets/Dheer Patel Resume.pdf" target="_blank" class="btn-resume">Resume ↗</a>
             <a href="#contact" class="btn-ghost">Get in Touch</a>
           </div>
         </div>
@@ -749,38 +806,36 @@
         <!-- Portrait photo -->
         <div class="hero-portrait">
           <img src="Assets/pfp.png" alt="Dheer Patel" />
-          <div class="hero-portrait-card">
-            <div class="hpc-logo">
-              <img src="Assets/94f0904a-777b-4706-8f3f-f5821c63ff45.png" alt="INHALYZE" />
-            </div>
-            <div>
-              <p class="hpc-name">INHALYZE</p>
-              <p class="hpc-sub">IRIS National Fair Finalist</p>
-            </div>
-          </div>
         </div>
       </div>
 
       <!-- INHALYZE feature -->
+      <div class="hi-header">
+        <span class="hi-header-label">Latest Flagship Project</span>
+      </div>
       <div class="hero-inhalyze">
-        <div class="hi-left">
-          <div class="hi-logo">
-            <img src="Assets/94f0904a-777b-4706-8f3f-f5821c63ff45.png" alt="INHALYZE" />
+        <div class="hi-top">
+          <div class="hi-identity">
+            <div class="hi-logo">
+              <img src="Assets/94f0904a-777b-4706-8f3f-f5821c63ff45.png" alt="INHALYZE" />
+            </div>
+            <div>
+              <p class="hi-name">INHALYZE</p>
+              <p class="hi-tag">Healthcare · IoT · 2024 – Present</p>
+            </div>
           </div>
-          <div>
-            <p class="hi-name">INHALYZE</p>
-            <p class="hi-tag">Flagship Project · Healthcare &amp; IoT</p>
+          <div class="hi-badges">
+            <div class="hi-stage">Pre-seed · Seeking Investment</div>
+            <div class="hi-badge">★ IRIS National Fair Finalist</div>
           </div>
         </div>
-        <p class="hi-desc">
-          Smart inhaler prototype for real-time respiratory monitoring — improving Asthma &amp; COPD care
-          through connected hardware and data-driven insights.
-        </p>
-        <div class="hi-stats">
-          <div class="hi-stat"><span>750K+</span><span>Students Reached</span></div>
-          <div class="hi-stat"><span>$21.6K</span><span>Funds Raised</span></div>
-          <div class="hi-stat"><span>3</span><span>Robotics Labs Built</span></div>
-          <div class="hi-badge">★ IRIS National Fair Finalist</div>
+        <div class="hi-content">
+          <p class="hi-desc">A smart inhaler prototype engineered to improve respiratory health management for Asthma and COPD patients — making respiratory care smarter, more accessible, and more effective.</p>
+          <ul class="hi-bullets">
+            <li>Real-time monitoring and data-driven insights for patients and clinicians</li>
+            <li>Finalist at The IRIS National Fair — India's most prestigious science competition</li>
+            <li>MVP complete — pre-seed stage, actively seeking investment to scale</li>
+          </ul>
         </div>
       </div>
     </section>
@@ -802,34 +857,51 @@
             at India's IRIS National Fair.
           </p>
           <p class="fade-up">
-            Beyond building products, I've led robotics education initiatives reaching hundreds of
-            thousands of students, published engineering research, and mentored peers from underserved communities.
+            Beyond building products, I've led the S.E.N.S.E community project on cellular radiation safety, published engineering research, and mentored peers from underserved communities.
           </p>
-          <div class="skill-wrap fade-up">
-            <span class="skill">Systems Engineering</span>
-            <span class="skill">Product Design</span>
-            <span class="skill">Medical Devices</span>
-            <span class="skill">Robotics</span>
-            <span class="skill">Research</span>
-            <span class="skill">STEM Education</span>
-          </div>
         </div>
         <div class="edu-stack">
           <div class="edu-card fade-up">
-            <strong>University of Illinois Urbana-Champaign</strong>
-            <span>BS, Systems Engineering &amp; Design</span>
-            <span>Grainger College of Engineering · 2025 – 2029</span>
-            <span class="edu-honor">Dean's List · James Scholar</span>
+            <div class="edu-logo">
+              <img src="Assets/uiuc logo.png" alt="UIUC" />
+            </div>
+            <div class="edu-card-body">
+              <strong>University of Illinois Urbana-Champaign</strong>
+              <span>BS, Systems Engineering &amp; Design</span>
+              <span>Grainger College of Engineering · 2025 – 2029</span>
+              <div class="edu-honors">
+                <span class="edu-honor">Dean's List</span>
+                <span class="edu-honor">James Scholar</span>
+              </div>
+            </div>
           </div>
           <div class="edu-card fade-up">
-            <strong>Jamnabai Narsee International School</strong>
-            <span>International Baccalaureate</span>
-            <span>2023 – 2025</span>
+            <div class="edu-logo">
+              <img src="Assets/image.png" alt="JNIS" />
+            </div>
+            <div class="edu-card-body">
+              <strong>Jamnabai Narsee International School</strong>
+              <span>International Baccalaureate</span>
+              <span>2023 – 2025</span>
+              <div class="edu-honors">
+                <span class="edu-honor">House Captain</span>
+                <span class="edu-honor">Jamnabai Adolescent Mentor</span>
+              </div>
+            </div>
           </div>
           <div class="edu-card fade-up">
-            <strong>Jamnabai Narsee School</strong>
-            <span>Grade 11 &amp; 12</span>
-            <span>2013 – 2023</span>
+            <div class="edu-logo">
+              <img src="Assets/jns logo.png" alt="JNS" />
+            </div>
+            <div class="edu-card-body">
+              <strong>Jamnabai Narsee School</strong>
+              <span>Grade 1 – 10</span>
+              <span>2013 – 2023</span>
+              <div class="edu-honors">
+                <span class="edu-honor">Head Boy</span>
+                <span class="edu-honor">House Captain</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -867,10 +939,10 @@
         <div class="proj-row fade-up">
           <span class="proj-n">03</span>
           <div class="proj-body">
-            <h3>S.E.N.S.E Community Project</h3>
-            <p>Founded and led a STEM education initiative across underserved schools — setting up three robotics labs, mentoring 15,000+ students, and raising $21,600 from corporate sponsors. Total reach: 750,000+ students.</p>
+            <h3>S.E.N.S.E — Sustainable EMF Navigation &amp; Safety Education</h3>
+            <p>Led a community awareness project measuring and analyzing local cellular radiation levels — identifying areas exceeding safety limits, executing public campaigns, and partnering with local authorities to advocate for improved radiation safety regulations.</p>
             <div class="proj-tags">
-              <span>Community</span><span>STEM Education</span><span>Leadership</span><span>2023 – 2024</span>
+              <span>Community</span><span>Research &amp; Analysis</span><span>Public Health</span><span>Leadership</span><span>2023 – 2024</span>
             </div>
           </div>
           <span class="proj-arrow">↗</span>
@@ -974,7 +1046,7 @@
           <h3>Leadership</h3>
           <ul>
             <li><strong>Head Boy</strong><span>Grade 10 Student Council · 2022</span></li>
-            <li><strong>Head Captain</strong><span>Grade 12 Student Council · 2024</span></li>
+            <li><strong>House Captain</strong><span>Grade 12 Student Council · 2024</span></li>
             <li><strong>Jamnabai Adolescent Mentor</strong><span>JAM · 2024</span></li>
             <li><strong>S.E.N.S.E Founder &amp; Executor</strong><span>750K+ students reached · 2023–24</span></li>
             <li><strong>Robotics Workshops</strong><span>20+ students with Autism &amp; Down Syndrome</span></li>
