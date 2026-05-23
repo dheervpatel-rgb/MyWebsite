@@ -283,36 +283,79 @@
       letter-spacing: 0.05em;
     }
 
-    /* Hero bottom — stats */
-    .hero-stats {
+    /* Hero bottom — INHALYZE feature */
+    .hero-inhalyze {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
+      grid-template-columns: auto 1fr auto;
+      gap: 32px;
+      align-items: center;
+      background: var(--glass);
+      border: 1px solid var(--glass-b);
       border-radius: var(--radius);
+      padding: 24px 32px;
+      backdrop-filter: blur(16px);
+      position: relative;
       overflow: hidden;
     }
-    .stat {
-      background: var(--bg2);
-      padding: 24px 28px;
-      transition: background .2s;
+    .hero-inhalyze::before {
+      content: '';
+      position: absolute; top: -60%; left: -10%;
+      width: 300px; height: 300px; border-radius: 50%;
+      background: var(--orange-glow);
+      filter: blur(60px);
+      pointer-events: none;
     }
-    .stat:hover { background: rgba(255,95,5,0.05); }
-    .stat-n {
+    .hi-left {
+      display: flex; align-items: center; gap: 14px;
+      flex-shrink: 0;
+    }
+    .hi-logo {
+      width: 48px; height: 48px; border-radius: 11px;
+      overflow: hidden; flex-shrink: 0;
+      border: 1px solid var(--glass-b);
+    }
+    .hi-logo img { width: 100%; height: 100%; object-fit: cover; }
+    .hi-name {
       font-family: 'DM Serif Display', serif;
-      font-size: 1.8rem;
-      letter-spacing: -0.02em;
-      color: var(--text);
-      display: block;
-      margin-bottom: 4px;
+      font-size: 1.1rem; letter-spacing: -0.01em;
     }
-    .stat-l {
+    .hi-tag {
       font-family: 'DM Mono', monospace;
-      font-size: 0.58rem;
-      color: var(--muted);
-      letter-spacing: 0.07em;
-      text-transform: uppercase;
+      font-size: 0.58rem; color: var(--orange);
+      letter-spacing: 0.06em; text-transform: uppercase;
+      margin-top: 2px;
+    }
+    .hi-desc {
+      font-size: 0.83rem; color: var(--muted);
+      line-height: 1.65;
+      border-left: 1px solid var(--border);
+      padding-left: 32px;
+    }
+    .hi-stats {
+      display: flex; align-items: center; gap: 28px;
+      flex-shrink: 0;
+      border-left: 1px solid var(--border);
+      padding-left: 32px;
+    }
+    .hi-stat span:first-child {
+      display: block;
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.3rem; letter-spacing: -0.02em;
+    }
+    .hi-stat span:last-child {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.55rem; color: var(--muted);
+      letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .hi-badge {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem; color: var(--orange);
+      letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 6px 14px;
+      background: rgba(255,95,5,0.1);
+      border: 1px solid rgba(255,95,5,0.22);
+      border-radius: 100px;
+      white-space: nowrap;
     }
 
     /* ══════════════════════════════════════
@@ -627,7 +670,9 @@
       footer { padding: 24px; }
       .hero-top { grid-template-columns: 1fr; }
       .hero-portrait { height: 340px; }
-      .hero-stats { grid-template-columns: repeat(2,1fr); }
+      .hero-inhalyze { grid-template-columns: 1fr; gap: 16px; }
+      .hi-desc { border-left: none; padding-left: 0; border-top: 1px solid var(--border); padding-top: 16px; }
+      .hi-stats { border-left: none; padding-left: 0; border-top: 1px solid var(--border); padding-top: 16px; }
       .about-grid { grid-template-columns: 1fr; gap: 40px; }
       .ach-cols { grid-template-columns: 1fr; gap: 32px; }
       .exp-row { grid-template-columns: 1fr; gap: 6px; }
@@ -716,23 +761,26 @@
         </div>
       </div>
 
-      <!-- Stats bar -->
-      <div class="hero-stats">
-        <div class="stat">
-          <span class="stat-n">750K+</span>
-          <span class="stat-l">Students Reached</span>
+      <!-- INHALYZE feature -->
+      <div class="hero-inhalyze">
+        <div class="hi-left">
+          <div class="hi-logo">
+            <img src="Assets/94f0904a-777b-4706-8f3f-f5821c63ff45.png" alt="INHALYZE" />
+          </div>
+          <div>
+            <p class="hi-name">INHALYZE</p>
+            <p class="hi-tag">Flagship Project · Healthcare &amp; IoT</p>
+          </div>
         </div>
-        <div class="stat">
-          <span class="stat-n">$21.6K</span>
-          <span class="stat-l">Funds Raised</span>
-        </div>
-        <div class="stat">
-          <span class="stat-n">3</span>
-          <span class="stat-l">Robotics Labs Built</span>
-        </div>
-        <div class="stat">
-          <span class="stat-n">SAT 1460</span>
-          <span class="stat-l">Math 730 · ERW 730</span>
+        <p class="hi-desc">
+          Smart inhaler prototype for real-time respiratory monitoring — improving Asthma &amp; COPD care
+          through connected hardware and data-driven insights.
+        </p>
+        <div class="hi-stats">
+          <div class="hi-stat"><span>750K+</span><span>Students Reached</span></div>
+          <div class="hi-stat"><span>$21.6K</span><span>Funds Raised</span></div>
+          <div class="hi-stat"><span>3</span><span>Robotics Labs Built</span></div>
+          <div class="hi-badge">★ IRIS National Fair Finalist</div>
         </div>
       </div>
     </section>
