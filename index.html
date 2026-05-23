@@ -161,6 +161,16 @@
       margin-bottom: 72px;
     }
 
+    .hero-avatar {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-bottom: 24px;
+      border: 2px solid var(--glass-b);
+      box-shadow: 0 0 0 4px rgba(255,95,5,0.12);
+    }
+    .hero-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
     .hero-eyebrow {
       font-family: 'DM Mono', monospace;
       font-size: 0.65rem;
@@ -700,6 +710,9 @@
     <section id="hero">
       <div class="hero-top">
         <div>
+          <div class="hero-avatar">
+            <img src="Assets/pfp.png" alt="Dheer Patel" />
+          </div>
           <p class="hero-eyebrow">Systems Engineer &amp; Inventor · Urbana, Illinois</p>
           <h1 class="hero-name">
             Dheer<br />
