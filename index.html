@@ -3,421 +3,1024 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dheer Patel — Portfolio</title>
+  <title>Dheer Patel — Systems Engineer & Inventor</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:         #060b14;
+      --bg2:        #09101d;
+      --glass:      rgba(255,255,255,0.04);
+      --glass-b:    rgba(255,255,255,0.08);
+      --text:       #f0ede8;
+      --muted:      #7a8499;
+      --orange:     #FF5F05;
+      --orange-glow:rgba(255,95,5,0.28);
+      --blue:       #13294B;
+      --accent2:    #4a9eff;
+      --amber:      #ffb347;
+      --border:     rgba(255,255,255,0.07);
+      --sidebar-w:  230px;
+      --radius:     16px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+      overflow-x: hidden;
+      cursor: none;
+    }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+
+    /* ── Cursor ── */
+    #cursor {
+      position: fixed; z-index: 9999; pointer-events: none;
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--orange); mix-blend-mode: screen;
+      transform: translate(-50%,-50%);
+      transition: width .2s, height .2s;
+    }
+    #cursor-ring {
+      position: fixed; z-index: 9998; pointer-events: none;
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 1.5px solid rgba(255,95,5,.35);
+      transform: translate(-50%,-50%);
+    }
+
+    /* ── Background orbs ── */
+    .orbs { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+    .orb {
+      position: absolute; border-radius: 50%;
+      filter: blur(80px); opacity: 0.18;
+      animation: drift 18s ease-in-out infinite alternate;
+    }
+    .orb-1 { width: 500px; height: 500px; background: #13294B; top: -100px; left: -120px; animation-duration: 20s; }
+    .orb-2 { width: 400px; height: 400px; background: var(--orange); bottom: 10%; right: -80px; animation-duration: 25s; animation-delay: -8s; opacity: 0.12; }
+    .orb-3 { width: 350px; height: 350px; background: #4a9eff; top: 50%; left: 40%; animation-duration: 22s; animation-delay: -4s; opacity: 0.1; }
+    @keyframes drift { from { transform: translate(0,0) scale(1); } to { transform: translate(40px, 30px) scale(1.08); } }
+
+    /* ── Sidebar ── */
+    #sidebar {
+      position: fixed; top: 0; left: 0;
+      width: var(--sidebar-w); height: 100vh;
+      border-right: 1px solid var(--border);
+      background: rgba(6,11,20,0.7);
+      backdrop-filter: blur(20px);
+      display: flex; flex-direction: column;
+      padding: 48px 32px;
+      z-index: 100;
+    }
+
+    .s-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem;
+      letter-spacing: -0.01em;
+      margin-bottom: 4px;
+    }
+    .s-role {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 52px;
+    }
+
+    .s-nav { display: flex; flex-direction: column; gap: 2px; flex: 1; }
+    .s-nav a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 8px 0;
+      display: flex; align-items: center; gap: 10px;
+      transition: color .25s;
+      position: relative;
+    }
+    .s-nav a::before {
+      content: '';
+      width: 0; height: 1px;
+      background: var(--orange);
+      transition: width .25s ease;
+      flex-shrink: 0;
+    }
+    .s-nav a:hover, .s-nav a.active { color: var(--text); }
+    .s-nav a:hover::before, .s-nav a.active::before { width: 18px; }
+
+    .s-footer { display: flex; flex-direction: column; gap: 10px; }
+    .s-footer a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+      transition: color .2s;
+    }
+    .s-footer a:hover { color: var(--orange); }
+
+    /* ── Main ── */
+    main { margin-left: var(--sidebar-w); position: relative; z-index: 1; }
+    section { padding: 100px 72px; border-bottom: 1px solid var(--border); }
+
+    /* ── Section label ── */
+    .sec-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      color: var(--orange);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .sec-label::after { content: ''; flex: 0 0 32px; height: 1px; background: var(--orange); opacity: .4; }
+
+    /* ══════════════════════════════════════
+       HERO
+    ══════════════════════════════════════ */
+    #hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 80px 72px;
+      position: relative;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero-top {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 64px;
+      align-items: center;
+      margin-bottom: 72px;
+    }
+
+    .hero-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .hero-eyebrow::before { content: ''; width: 20px; height: 1px; background: var(--orange); }
+
+    .hero-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(60px, 7.5vw, 100px);
+      line-height: 0.92;
+      letter-spacing: -0.03em;
+      margin-bottom: 28px;
+    }
+    .hero-name .line2 {
+      display: block;
+      background: linear-gradient(135deg, var(--orange) 0%, var(--amber) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-descriptor {
+      font-size: 1rem;
+      color: var(--muted);
+      margin-bottom: 44px;
+      line-height: 1.7;
+      max-width: 480px;
+    }
+    .hero-descriptor strong { color: var(--text); font-weight: 500; }
+
+    .hero-chips {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin-bottom: 40px;
+    }
+    .chip {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border: 1px solid var(--glass-b);
+      border-radius: 100px;
+      color: var(--muted);
+      background: var(--glass);
+      transition: border-color .2s, color .2s;
+    }
+    .chip:hover { border-color: var(--orange); color: var(--text); }
+
+    .hero-ctas { display: flex; gap: 14px; align-items: center; }
+    .btn-primary {
+      padding: 12px 28px;
+      background: var(--orange);
+      color: #fff;
+      font-size: 0.82rem;
+      font-weight: 500;
+      border-radius: 100px;
+      transition: opacity .2s, transform .2s;
+      letter-spacing: 0.02em;
+    }
+    .btn-primary:hover { opacity: .88; transform: translateY(-1px); }
+    .btn-ghost {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      text-transform: uppercase;
+      display: flex; align-items: center; gap: 6px;
+      transition: color .2s;
+    }
+    .btn-ghost:hover { color: var(--text); }
+    .btn-ghost::after { content: '↓'; }
+
+    /* Hero right — feature card */
+    .hero-card {
+      background: var(--glass);
+      border: 1px solid var(--glass-b);
+      border-radius: var(--radius);
+      backdrop-filter: blur(16px);
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-card::before {
+      content: '';
+      position: absolute; top: -40%; right: -20%;
+      width: 220px; height: 220px; border-radius: 50%;
+      background: var(--orange-glow);
+      filter: blur(48px);
+      pointer-events: none;
+    }
+    .hc-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem;
+      color: var(--orange);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .hc-logo {
+      width: 64px; height: 64px;
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 16px;
+      border: 1px solid var(--glass-b);
+    }
+    .hc-logo img { width: 100%; height: 100%; object-fit: cover; }
+    .hc-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.4rem;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+    .hc-desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 20px;
+    }
+    .hc-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 5px 12px;
+      background: rgba(255,95,5,0.12);
+      border: 1px solid rgba(255,95,5,0.25);
+      border-radius: 100px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem;
+      color: var(--orange);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .hc-badge::before { content: '★'; font-size: 0.6rem; }
+
+    /* Hero bottom — stats */
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .stat {
+      background: var(--bg2);
+      padding: 24px 28px;
+      transition: background .2s;
+    }
+    .stat:hover { background: rgba(255,95,5,0.05); }
+    .stat-n {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.8rem;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      display: block;
+      margin-bottom: 4px;
+    }
+    .stat-l {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem;
+      color: var(--muted);
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+
+    /* ══════════════════════════════════════
+       ABOUT
+    ══════════════════════════════════════ */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: start;
+    }
+
+    .about-h {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(32px, 3.5vw, 50px);
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      margin-bottom: 28px;
+    }
+    .about-h em { font-style: italic; color: var(--orange); }
+
+    .about-body p {
+      font-size: 0.92rem;
+      color: var(--muted);
+      margin-bottom: 16px;
+      line-height: 1.8;
+    }
+    .about-body p strong { color: var(--text); font-weight: 500; }
+
+    .skill-wrap { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
+    .skill {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--muted);
+      transition: border-color .2s, color .2s;
+    }
+    .skill:hover { border-color: var(--orange); color: var(--text); }
+
+    .edu-stack { display: flex; flex-direction: column; gap: 24px; }
+    .edu-card {
+      padding: 20px 24px;
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      border-left: 2px solid transparent;
+      transition: border-color .25s, background .25s;
+    }
+    .edu-card:hover { border-left-color: var(--orange); background: rgba(255,95,5,0.04); }
+    .edu-card strong { display: block; font-size: 0.9rem; font-weight: 500; margin-bottom: 4px; }
+    .edu-card span {
+      display: block;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      line-height: 1.7;
+    }
+    .edu-card .edu-honor {
+      display: inline-flex; align-items: center; gap: 4px;
+      margin-top: 8px;
+      padding: 3px 8px;
+      background: rgba(255,179,71,0.1);
+      border: 1px solid rgba(255,179,71,0.2);
+      border-radius: 100px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.55rem;
+      color: var(--amber);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* ══════════════════════════════════════
+       PROJECTS
+    ══════════════════════════════════════ */
+    .proj-list { display: flex; flex-direction: column; }
+    .proj-row {
+      display: grid;
+      grid-template-columns: 44px 1fr 28px;
+      gap: 28px;
+      align-items: start;
+      padding: 36px 0;
+      border-bottom: 1px solid var(--border);
+      cursor: default;
+      transition: background .2s;
+    }
+    .proj-row:first-child { border-top: 1px solid var(--border); }
+    .proj-row:hover { background: rgba(255,255,255,0.015); margin: 0 -16px; padding-left: 16px; padding-right: 16px; border-radius: 12px; border-color: transparent; }
+
+    .proj-n {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--muted);
+      padding-top: 5px;
+    }
+
+    .proj-body h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.4rem;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+      transition: color .2s;
+    }
+    .proj-row:hover .proj-body h3 { color: var(--orange); }
+
+    .proj-body p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 580px;
+      margin-bottom: 14px;
+    }
+
+    .proj-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .proj-tags span {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.56rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 3px 8px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+    }
+
+    .proj-arrow {
+      font-size: 1.1rem;
+      color: var(--muted);
+      opacity: 0.4;
+      transition: color .2s, transform .2s, opacity .2s;
+      padding-top: 4px;
+    }
+    .proj-row:hover .proj-arrow { color: var(--orange); opacity: 1; transform: translate(3px,-3px); }
+
+    /* ══════════════════════════════════════
+       EXPERIENCE
+    ══════════════════════════════════════ */
+    .exp-list { display: flex; flex-direction: column; }
+    .exp-row {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 40px;
+      padding: 36px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .exp-row:first-child { border-top: 1px solid var(--border); }
+
+    .exp-date {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      padding-top: 4px;
+      line-height: 1.7;
+    }
+
+    .exp-body h3 { font-size: 0.98rem; font-weight: 500; margin-bottom: 4px; }
+    .exp-org {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      color: var(--orange);
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      display: block;
+    }
+    .exp-body ul { display: flex; flex-direction: column; gap: 7px; }
+    .exp-body li {
+      font-size: 0.84rem;
+      color: var(--muted);
+      padding-left: 16px;
+      position: relative;
+      line-height: 1.65;
+    }
+    .exp-body li::before { content: '–'; position: absolute; left: 0; color: var(--muted); opacity: .5; }
+
+    .exp-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 14px; }
+    .exp-tags span {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.56rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 3px 8px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+    }
+
+    /* ══════════════════════════════════════
+       ACHIEVEMENTS
+    ══════════════════════════════════════ */
+    .ach-cols {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      align-items: start;
+    }
+    .ach-col h3 {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      color: var(--orange);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .ach-col ul { display: flex; flex-direction: column; gap: 16px; }
+    .ach-col li strong { display: block; font-size: 0.82rem; font-weight: 500; line-height: 1.4; }
+    .ach-col li span {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem;
+      color: var(--muted);
+      letter-spacing: 0.03em;
+    }
+
+    /* ══════════════════════════════════════
+       CONTACT
+    ══════════════════════════════════════ */
+    #contact { border-bottom: none; }
+
+    .contact-h {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(36px, 5vw, 68px);
+      line-height: 1;
+      letter-spacing: -0.03em;
+      margin-bottom: 56px;
+    }
+    .contact-h em { font-style: italic; color: var(--orange); }
+
+    .contact-list { display: flex; flex-direction: column; }
+    .contact-row {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 32px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: center;
+      transition: background .2s;
+    }
+    .contact-row:first-child { border-top: 1px solid var(--border); }
+    a.contact-row:hover { background: rgba(255,95,5,0.04); margin: 0 -16px; padding-left: 16px; padding-right: 16px; border-radius: 10px; border-color: transparent; }
+
+    .c-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem;
+      color: var(--muted);
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+    .c-val { font-size: 0.92rem; color: var(--text); transition: color .2s; }
+    a.contact-row:hover .c-val { color: var(--orange); }
+
+    /* ── Footer ── */
+    footer {
+      padding: 28px 72px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border);
+    }
+    footer span {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── Animations ── */
+    .fade-up {
+      opacity: 0; transform: translateY(22px);
+      transition: opacity .65s cubic-bezier(.16,1,.3,1), transform .65s cubic-bezier(.16,1,.3,1);
+    }
+    .fade-up.vis { opacity: 1; transform: translateY(0); }
+
+    /* ── Mobile ── */
+    #mob-bar {
+      display: none;
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 200;
+      padding: 18px 24px;
+      background: rgba(6,11,20,0.9);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      justify-content: space-between; align-items: center;
+    }
+    .mob-name { font-family: 'DM Serif Display', serif; font-size: 1rem; }
+    #mob-btn { background: none; border: none; cursor: none; display: flex; flex-direction: column; gap: 5px; }
+    #mob-btn span { display: block; width: 22px; height: 1px; background: var(--text); transition: transform .3s, opacity .3s; }
+    .mob-overlay {
+      display: none; position: fixed; inset: 0;
+      background: var(--bg); z-index: 150;
+      flex-direction: column; justify-content: center; align-items: center; gap: 28px;
+    }
+    .mob-overlay.open { display: flex; }
+    .mob-overlay a { font-family: 'DM Serif Display', serif; font-size: 2.2rem; letter-spacing: -0.02em; }
+
+    @media (max-width: 960px) {
+      #sidebar { display: none; }
+      #mob-bar { display: flex; }
+      main { margin-left: 0; }
+      section { padding: 80px 24px; }
+      footer { padding: 24px; }
+      .hero-top { grid-template-columns: 1fr; }
+      .hero-card { display: none; }
+      .hero-stats { grid-template-columns: repeat(2,1fr); }
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .ach-cols { grid-template-columns: 1fr; gap: 32px; }
+      .exp-row { grid-template-columns: 1fr; gap: 6px; }
+      .proj-row { grid-template-columns: 32px 1fr 20px; gap: 16px; }
+    }
+  </style>
 </head>
 <body>
-  <!-- Cursor -->
+
   <div id="cursor"></div>
   <div id="cursor-ring"></div>
-  <div id="spotlight"></div>
 
-  <!-- Background orbs -->
-  <div class="bg-orbs">
+  <div class="orbs">
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
     <div class="orb orb-3"></div>
   </div>
 
-  <!-- NAV -->
-  <nav id="navbar">
-    <div class="nav-inner">
-      <span class="nav-logo">DP</span>
-      <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#achievements">Achievements</a></li>
-        <li><a href="#contact" class="nav-cta">Contact</a></li>
-      </ul>
-      <button class="hamburger" id="hamburger" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </nav>
+  <!-- Mobile -->
+  <div id="mob-bar">
+    <span class="mob-name">Dheer Patel</span>
+    <button id="mob-btn" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mob-overlay" id="mob-overlay">
+    <a href="#about" class="ml">About</a>
+    <a href="#projects" class="ml">Projects</a>
+    <a href="#experience" class="ml">Experience</a>
+    <a href="#achievements" class="ml">Achievements</a>
+    <a href="#contact" class="ml">Contact</a>
+  </div>
 
-  <!-- HERO -->
-  <section id="hero">
-    <div class="hero-content">
-      <p class="hero-eyebrow">Systems Engineer &amp; Inventor</p>
-      <h1>Dheer<br /><span class="accent">Patel</span></h1>
-      <p class="hero-sub">
-        Founder of INHALYZE · UIUC Grainger · Dean's List · James Scholar
-      </p>
-      <div class="hero-actions">
-        <a href="#projects" class="btn btn-primary">View My Work</a>
-        <a href="#contact" class="btn btn-outline">Get in Touch</a>
-      </div>
+  <!-- Sidebar -->
+  <aside id="sidebar">
+    <div>
+      <p class="s-logo">Dheer Patel</p>
+      <p class="s-role">Systems Engineer · UIUC</p>
     </div>
-    <div class="hero-visual">
-      <div class="hero-card">
-        <img src="Assets/94f0904a-777b-4706-8f3f-f5821c63ff45.png" alt="INHALYZE logo" class="hero-logo" />
-        <div class="hero-card-text">
-          <strong>INHALYZE</strong>
-          <span>Smart Inhaler · IRIS National Fair Finalist</span>
+    <nav class="s-nav">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#achievements">Achievements</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="s-footer">
+      <a href="mailto:dheervpatel@gmail.com">dheervpatel@gmail.com</a>
+      <a href="https://linkedin.com/in/dheer-patel-uiuc" target="_blank">LinkedIn ↗</a>
+      <a href="https://dheerpatel.com">dheerpatel.com</a>
+    </div>
+  </aside>
+
+  <main>
+
+    <!-- ══ HERO ══ -->
+    <section id="hero">
+      <div class="hero-top">
+        <div>
+          <p class="hero-eyebrow">Systems Engineer &amp; Inventor · Urbana, Illinois</p>
+          <h1 class="hero-name">
+            Dheer<br />
+            <span class="line2">Patel.</span>
+          </h1>
+          <p class="hero-descriptor">
+            <strong>BS, Systems Engineering &amp; Design @ UIUC</strong> — Dean's List, James Scholar.<br />
+            Founder of <strong>INHALYZE</strong>, a smart inhaler for Asthma &amp; COPD patients.
+            I build things that sit at the intersection of engineering, healthcare, and community.
+          </p>
+<div class="hero-ctas">
+            <a href="#projects" class="btn-primary">See My Work</a>
+            <a href="#contact" class="btn-ghost">Get in Touch</a>
+          </div>
+        </div>
+
+        <!-- Feature card: INHALYZE -->
+        <div class="hero-card">
+          <p class="hc-tag">Flagship Project</p>
+          <div class="hc-logo">
+            <img src="Assets/94f0904a-777b-4706-8f3f-f5821c63ff45.png" alt="INHALYZE logo" />
+          </div>
+          <p class="hc-name">INHALYZE</p>
+          <p class="hc-desc">
+            Smart inhaler prototype for real-time respiratory monitoring —
+            improving Asthma &amp; COPD care through connected hardware and data-driven insights.
+          </p>
+          <span class="hc-badge">IRIS National Fair Finalist</span>
         </div>
       </div>
-      <div class="hero-stat-grid">
-        <div class="stat-card"><span class="stat-num">750K+</span><span class="stat-label">Students Reached</span></div>
-        <div class="stat-card"><span class="stat-num">$21.6K</span><span class="stat-label">Funds Raised</span></div>
-        <div class="stat-card"><span class="stat-num">3</span><span class="stat-label">Robotics Labs Built</span></div>
-        <div class="stat-card"><span class="stat-num">SAT 1460</span><span class="stat-label">Math 730 · ERW 730</span></div>
-      </div>
-    </div>
-    <div class="scroll-hint">
-      <span>Scroll</span>
-      <div class="scroll-line"></div>
-    </div>
-  </section>
 
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">About</span>
-        <h2>Builder. Researcher. Leader.</h2>
+      <!-- Stats bar -->
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-n">750K+</span>
+          <span class="stat-l">Students Reached</span>
+        </div>
+        <div class="stat">
+          <span class="stat-n">$21.6K</span>
+          <span class="stat-l">Funds Raised</span>
+        </div>
+        <div class="stat">
+          <span class="stat-n">3</span>
+          <span class="stat-l">Robotics Labs Built</span>
+        </div>
+        <div class="stat">
+          <span class="stat-n">SAT 1460</span>
+          <span class="stat-l">Math 730 · ERW 730</span>
+        </div>
       </div>
+    </section>
+
+    <!-- ══ ABOUT ══ -->
+    <section id="about">
+      <span class="sec-label">01 — About</span>
       <div class="about-grid">
-        <div class="about-text">
-          <p>
-            I'm a Systems Engineering &amp; Design student at the <strong>University of Illinois Urbana-Champaign</strong>,
-            passionate about solving real-world problems at the intersection of engineering, technology, and healthcare.
+        <div class="about-body">
+          <h2 class="about-h fade-up">Builder.<br /><em>Researcher.</em><br />Leader.</h2>
+          <p class="fade-up">
+            I'm a <strong>Systems Engineering &amp; Design</strong> student at the University of Illinois
+            Urbana-Champaign, passionate about solving real-world problems at the intersection of
+            engineering, technology, and healthcare.
           </p>
-          <p>
-            My flagship project, <strong>INHALYZE</strong>, is a smart inhaler prototype engineered to improve
-            respiratory health management for Asthma and COPD patients — selected as a finalist at India's
-            prestigious IRIS National Fair.
+          <p class="fade-up">
+            My flagship project, <strong>INHALYZE</strong>, is a smart inhaler prototype engineered to
+            improve respiratory health management for Asthma and COPD patients — selected as a finalist
+            at India's IRIS National Fair.
           </p>
-          <p>
-            Beyond building products, I've led robotics education initiatives reaching hundreds of thousands
-            of students, published engineering research, and mentored peers from underserved communities.
+          <p class="fade-up">
+            Beyond building products, I've led robotics education initiatives reaching hundreds of
+            thousands of students, published engineering research, and mentored peers from underserved communities.
           </p>
-          <div class="about-tags">
-            <span>Systems Engineering</span>
-            <span>Product Design</span>
-            <span>Medical Devices</span>
-            <span>Robotics</span>
-            <span>Research</span>
-            <span>Education Outreach</span>
+          <div class="skill-wrap fade-up">
+            <span class="skill">Systems Engineering</span>
+            <span class="skill">Product Design</span>
+            <span class="skill">Medical Devices</span>
+            <span class="skill">Robotics</span>
+            <span class="skill">Research</span>
+            <span class="skill">STEM Education</span>
           </div>
         </div>
-        <div class="about-edu">
-          <h3>Education</h3>
-          <div class="edu-item">
-            <div class="edu-icon uiuc-icon">I</div>
-            <div>
-              <strong>University of Illinois Urbana-Champaign</strong>
-              <span>BS, Systems Engineering &amp; Design · 2025–2029</span>
-              <span class="edu-note">Dean's List · James Scholar · Grainger College</span>
-            </div>
+        <div class="edu-stack">
+          <div class="edu-card fade-up">
+            <strong>University of Illinois Urbana-Champaign</strong>
+            <span>BS, Systems Engineering &amp; Design</span>
+            <span>Grainger College of Engineering · 2025 – 2029</span>
+            <span class="edu-honor">Dean's List · James Scholar</span>
           </div>
-          <div class="edu-item">
-            <div class="edu-icon jnis-icon">JN</div>
-            <div>
-              <strong>Jamnabai Narsee International School</strong>
-              <span>International Baccalaureate · 2023–2025</span>
-            </div>
+          <div class="edu-card fade-up">
+            <strong>Jamnabai Narsee International School</strong>
+            <span>International Baccalaureate</span>
+            <span>2023 – 2025</span>
           </div>
-          <div class="edu-item">
-            <div class="edu-icon jn-icon">JN</div>
-            <div>
-              <strong>Jamnabai Narsee School</strong>
-              <span>Grade 11 &amp; 12 · 2013–2023</span>
-            </div>
+          <div class="edu-card fade-up">
+            <strong>Jamnabai Narsee School</strong>
+            <span>Grade 11 &amp; 12</span>
+            <span>2013 – 2023</span>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- PROJECTS -->
-  <section id="projects">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Projects</span>
-        <h2>Innovations &amp; Research</h2>
-      </div>
-      <div class="projects-grid">
+    <!-- ══ PROJECTS ══ -->
+    <section id="projects">
+      <span class="sec-label">02 — Projects</span>
+      <div class="proj-list">
 
-        <div class="project-card project-featured">
-          <div class="project-img-wrap">
-            <img src="Assets/94f0904a-777b-4706-8f3f-f5821c63ff45.png" alt="INHALYZE" />
-          </div>
-          <div class="project-body">
-            <div class="project-meta">
-              <span class="project-tag">Healthcare · IoT</span>
-              <span class="project-year">2024 – Present</span>
-            </div>
+        <div class="proj-row fade-up">
+          <span class="proj-n">01</span>
+          <div class="proj-body">
             <h3>INHALYZE — Smart Inhaler</h3>
-            <p>
-              Researched, designed, and developed a smart inhaler prototype engineered to improve
-              respiratory health management for Asthma and COPD patients. Selected as a <strong>Finalist
-              at The IRIS National Fair</strong>, one of India's most prestigious science and innovation competitions.
-            </p>
-            <ul class="project-bullets">
-              <li>Innovative solutions for improved respiratory health management</li>
-              <li>Real-time monitoring and data-driven insights for patients</li>
-              <li>Making respiratory care smarter, more accessible, and more effective</li>
-            </ul>
-            <div class="project-skills">
-              <span>Product Design</span>
-              <span>Prototyping</span>
-              <span>R&amp;D</span>
-              <span>Healthcare Tech</span>
+            <p>Designed and developed a smart inhaler prototype for Asthma and COPD patients with real-time monitoring and data-driven insights. Selected as a Finalist at The IRIS National Fair, one of India's most prestigious science competitions.</p>
+            <div class="proj-tags">
+              <span>Healthcare · IoT</span><span>Product Design</span><span>Prototyping</span><span>R&amp;D</span><span>2024 – Present</span>
             </div>
           </div>
+          <span class="proj-arrow">↗</span>
         </div>
 
-        <div class="project-card">
-          <div class="project-body">
-            <div class="project-meta">
-              <span class="project-tag">Robotics · Safety</span>
-              <span class="project-year">2022</span>
-            </div>
+        <div class="proj-row fade-up">
+          <span class="proj-n">02</span>
+          <div class="proj-body">
             <h3>Autonomous Safety Braking System</h3>
-            <p>
-              Developed an autonomous safety braking mechanism for bicycles to prevent collisions,
-              utilizing sensor data for enhanced safety.
-            </p>
-            <ul class="project-bullets">
-              <li>Published research paper in NAIRJC (North Asian International Research Journal)</li>
-              <li>Sensor-fusion approach using real-time obstacle detection</li>
-            </ul>
-            <div class="project-skills">
-              <span>Embedded Systems</span>
-              <span>Sensor Fusion</span>
-              <span>Published Research</span>
+            <p>Developed an autonomous braking mechanism for bicycles using sensor fusion to detect and prevent collisions. Published in the North Asian International Research Journal (NAIRJC).</p>
+            <div class="proj-tags">
+              <span>Robotics · Safety</span><span>Embedded Systems</span><span>Published Research</span><span>2022</span>
             </div>
           </div>
+          <span class="proj-arrow">↗</span>
         </div>
 
-        <div class="project-card">
-          <div class="project-body">
-            <div class="project-meta">
-              <span class="project-tag">Community · Education</span>
-              <span class="project-year">2023–24</span>
-            </div>
+        <div class="proj-row fade-up">
+          <span class="proj-n">03</span>
+          <div class="proj-body">
             <h3>S.E.N.S.E Community Project</h3>
-            <p>
-              Founded and executed a community initiative focused on STEM education and robotics outreach,
-              setting up three robotics labs in underserved schools and engaging over 750,000 students.
-            </p>
-            <ul class="project-bullets">
-              <li>Mentored 15,000+ students across underserved communities</li>
-              <li>Raised $21,600 from corporate sponsors</li>
-              <li>Enabled 2,500+ students to engage in robotics education</li>
-            </ul>
-            <div class="project-skills">
-              <span>Leadership</span>
-              <span>STEM Outreach</span>
-              <span>Community Building</span>
+            <p>Founded and led a STEM education initiative across underserved schools — setting up three robotics labs, mentoring 15,000+ students, and raising $21,600 from corporate sponsors. Total reach: 750,000+ students.</p>
+            <div class="proj-tags">
+              <span>Community</span><span>STEM Education</span><span>Leadership</span><span>2023 – 2024</span>
             </div>
           </div>
+          <span class="proj-arrow">↗</span>
         </div>
 
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- EXPERIENCE -->
-  <section id="experience">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Experience</span>
-        <h2>Professional Journey</h2>
-      </div>
-      <div class="timeline">
+    <!-- ══ EXPERIENCE ══ -->
+    <section id="experience">
+      <span class="sec-label">03 — Experience</span>
+      <div class="exp-list">
 
-        <div class="timeline-item">
-          <div class="tl-dot"></div>
-          <div class="tl-content">
-            <div class="tl-header">
-              <div>
-                <h3>Onsite Consultant</h3>
-                <span class="tl-org">University of Illinois Urbana-Champaign</span>
-              </div>
-              <span class="tl-date">May 2026 – Present</span>
-            </div>
+        <div class="exp-row fade-up">
+          <div class="exp-date">May 2026<br />Present</div>
+          <div class="exp-body">
+            <h3>Onsite Consultant</h3>
+            <span class="exp-org">University of Illinois Urbana-Champaign</span>
             <ul>
-              <li>Providing hands-on technical support to UIUC faculty, staff, students, and retirees</li>
-              <li>Troubleshooting and repairing computer hardware and software issues</li>
-              <li>Performing home networking setup and configuration, disk and file restoration, virus removal</li>
-              <li>Working within departmental units on system and network administration tasks</li>
+              <li>Hands-on technical support for UIUC faculty, staff, students, and retirees</li>
+              <li>Troubleshooting hardware/software, home networking setup, disk restoration, virus removal</li>
+              <li>System and network administration within departmental units</li>
             </ul>
-            <div class="tl-tags"><span>Onsite Management</span><span>IT Support</span></div>
+            <div class="exp-tags"><span>IT Support</span><span>Networking</span><span>Systems Admin</span></div>
           </div>
         </div>
 
-        <div class="timeline-item">
-          <div class="tl-dot"></div>
-          <div class="tl-content">
-            <div class="tl-header">
-              <div>
-                <h3>Inventor &amp; Developer</h3>
-                <span class="tl-org">INHALYZE · Self-employed</span>
-              </div>
-              <span class="tl-date">Jan 2024 – Present</span>
-            </div>
+        <div class="exp-row fade-up">
+          <div class="exp-date">Jan 2024<br />Present</div>
+          <div class="exp-body">
+            <h3>Inventor &amp; Developer</h3>
+            <span class="exp-org">INHALYZE · Self-employed</span>
             <ul>
               <li>Researching, designing, and developing a smart inhaler prototype for Asthma and COPD patients</li>
-              <li>Working toward making respiratory care smarter, more accessible, and more effective</li>
               <li>Selected as a Finalist to present INHALYZE at The IRIS National Fair</li>
             </ul>
-            <div class="tl-tags"><span>Product Design</span><span>Prototyping</span><span>R&amp;D</span></div>
+            <div class="exp-tags"><span>Product Design</span><span>Prototyping</span><span>R&amp;D</span></div>
           </div>
         </div>
 
-        <div class="timeline-item">
-          <div class="tl-dot"></div>
-          <div class="tl-content">
-            <div class="tl-header">
-              <div>
-                <h3>Systems Engineering Intern</h3>
-                <span class="tl-org">Image Gravures · Ahmedabad, India</span>
-              </div>
-              <span class="tl-date">Jul 2024 · 1 month</span>
-            </div>
+        <div class="exp-row fade-up">
+          <div class="exp-date">Jul 2024<br />1 month</div>
+          <div class="exp-body">
+            <h3>Systems Engineering Intern</h3>
+            <span class="exp-org">Image Gravures · Ahmedabad, India</span>
             <ul>
-              <li>Studied the full manufacturing workflow — job card creation, CNC machining to electroplating (Nickel &amp; Copper), laser engraving, and chromium finishing</li>
-              <li>Applied mechanical engineering principles through hands-on component assembly, quality inspection, and process monitoring</li>
-              <li>Observed real-world quality control practices including dimensional checks, adhesion testing, and print proofing</li>
-              <li>Prepared and presented a comprehensive project report with findings and optimization suggestions</li>
+              <li>Full manufacturing workflow — CNC machining, electroplating (Nickel &amp; Copper), laser engraving, chromium finishing</li>
+              <li>Quality inspection, process monitoring, and comprehensive project report</li>
             </ul>
-            <div class="tl-tags"><span>Manufacturing</span><span>Quality Control</span><span>Process Optimization</span></div>
+            <div class="exp-tags"><span>Manufacturing</span><span>Quality Control</span><span>Process Optimization</span></div>
           </div>
         </div>
 
-        <div class="timeline-item">
-          <div class="tl-dot"></div>
-          <div class="tl-content">
-            <div class="tl-header">
-              <div>
-                <h3>Mechanical Engineering Intern</h3>
-                <span class="tl-org">D. Parikh Engineering Works · Mumbai, India</span>
-              </div>
-              <span class="tl-date">Jun 2024 – Jul 2024 · 2 months</span>
-            </div>
+        <div class="exp-row fade-up">
+          <div class="exp-date">Jun – Jul 2024<br />2 months</div>
+          <div class="exp-body">
+            <h3>Mechanical Engineering Intern</h3>
+            <span class="exp-org">D. Parikh Engineering Works · Mumbai, India</span>
             <ul>
-              <li>Interned at India's leading ISO 9001 certified manufacturer of basket centrifuges, established in 1948</li>
-              <li>Conducted detailed analysis of the full centrifuge manufacturing process — spanning design &amp; engineering, raw material sourcing, cutting &amp; fabrication, welding, machining, assembly &amp; testing</li>
-              <li>Gained hands-on experience assembling centrifuge components and ensuring quality control</li>
-              <li>Authored and presented a comprehensive research paper titled "Manufacturing of Industrial Pharmaceutical Centrifuges"</li>
+              <li>India's leading ISO 9001 certified manufacturer of basket centrifuges, est. 1948</li>
+              <li>Full process analysis — design, fabrication, welding, machining, assembly &amp; testing</li>
+              <li>Research paper: "Manufacturing of Industrial Pharmaceutical Centrifuges"</li>
             </ul>
-            <div class="tl-tags"><span>Manufacturing Engineering</span><span>Quality Assurance</span><span>Published Research</span></div>
+            <div class="exp-tags"><span>Manufacturing Engineering</span><span>Quality Assurance</span><span>Published Research</span></div>
           </div>
         </div>
 
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ACHIEVEMENTS -->
-  <section id="achievements">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Achievements</span>
-        <h2>Honors &amp; Recognition</h2>
-      </div>
-      <div class="ach-grid">
+    <!-- ══ ACHIEVEMENTS ══ -->
+    <section id="achievements" style="padding-top:64px;">
+      <span class="sec-label">04 — Achievements</span>
+      <div class="ach-cols">
 
-        <div class="ach-block">
-          <div class="ach-icon">🎓</div>
-          <h3>Academic Honors</h3>
+        <div class="ach-col fade-up">
+          <h3>Academic</h3>
           <ul>
-            <li><div class="ach-row"><strong>Dean's List</strong><span class="ach-year">2026</span></div><span class="ach-desc">Grainger College of Engineering, UIUC</span></li>
-            <li><div class="ach-row"><strong>James Scholar</strong><span class="ach-year">2026</span></div><span class="ach-desc">University of Illinois Urbana-Champaign</span></li>
-            <li><div class="ach-row"><strong>HKIMO Gold Award</strong><span class="ach-year">2024</span></div><span class="ach-desc">Hong Kong International Math Olympiad</span></li>
-            <li><div class="ach-row"><strong>HKIMO Finals Bronze</strong><span class="ach-year">2023</span></div><span class="ach-desc">Hong Kong International Math Olympiad Finals</span></li>
-            <li><div class="ach-row"><strong>SAT 1460</strong><span class="ach-year">2024</span></div><span class="ach-desc">Math: 730 · ERW: 730</span></li>
-            <li><div class="ach-row"><strong>AP Computer Science A</strong><span class="ach-year">2022</span></div><span class="ach-desc">Score: 5</span></li>
+            <li><strong>Dean's List</strong><span>Grainger College of Engineering, UIUC · 2026</span></li>
+            <li><strong>James Scholar</strong><span>University of Illinois Urbana-Champaign · 2026</span></li>
+            <li><strong>HKIMO Gold Award</strong><span>Hong Kong International Math Olympiad · 2024</span></li>
+            <li><strong>HKIMO Finals Bronze</strong><span>2023</span></li>
+            <li><strong>SAT 1460</strong><span>Math 730 · ERW 730 · 2024</span></li>
+            <li><strong>AP Computer Science A — Score 5</strong><span>2022</span></li>
           </ul>
         </div>
 
-        <div class="ach-block">
-          <div class="ach-icon">🤖</div>
+        <div class="ach-col fade-up">
           <h3>Robotics</h3>
           <ul>
-            <li><div class="ach-row"><strong>FRC Worlds Rookie All Star Award</strong><span class="ach-year">2024</span></div></li>
-            <li><div class="ach-row"><strong>FRC Nationals Finalist &amp; Alliance Captain</strong><span class="ach-year">2024</span></div></li>
-            <li><div class="ach-row"><strong>FRC Regionals Excellence in Engineering Award</strong><span class="ach-year">2024</span></div></li>
-            <li><div class="ach-row"><strong>FRC Regionals Rookie All Star Award</strong><span class="ach-year">2024</span></div></li>
-            <li><div class="ach-row"><strong>FTC Nationals Connect Award</strong><span class="ach-year">2023</span></div></li>
-            <li><div class="ach-row"><strong>FTC Internationals Robot Game Semi-Finalist</strong><span class="ach-year">2023</span></div></li>
-            <li><div class="ach-row"><strong>FTC Internationals Judges Choice Award</strong><span class="ach-year">2023</span></div></li>
-            <li><div class="ach-row"><strong>Dean's List Semi-Finalist (FTC)</strong><span class="ach-year">2023</span></div></li>
-            <li><div class="ach-row"><strong>World Robotics Olympiad</strong><span class="ach-year">2022</span></div><span class="ach-desc">National Rank 3</span></li>
+            <li><strong>FRC Worlds Rookie All Star Award</strong><span>2024</span></li>
+            <li><strong>FRC Nationals Finalist &amp; Alliance Captain</strong><span>2024</span></li>
+            <li><strong>FRC Regionals Excellence in Engineering Award</strong><span>2024</span></li>
+            <li><strong>FTC Internationals Semi-Finalist</strong><span>2023</span></li>
+            <li><strong>FTC Internationals Judges Choice Award</strong><span>2023</span></li>
+            <li><strong>World Robotics Olympiad — National Rank 3</strong><span>2022</span></li>
           </ul>
         </div>
 
-        <div class="ach-block">
-          <div class="ach-icon">🏛️</div>
+        <div class="ach-col fade-up">
           <h3>Leadership</h3>
           <ul>
-            <li><div class="ach-row"><strong>Head Boy</strong><span class="ach-year">2022</span></div><span class="ach-desc">Grade 10 Student Council</span></li>
-            <li><div class="ach-row"><strong>Head Captain</strong><span class="ach-year">2024</span></div><span class="ach-desc">Grade 12 Student Council</span></li>
-            <li><div class="ach-row"><strong>Jamnabai Adolescent Mentor</strong><span class="ach-year">2024</span></div><span class="ach-desc">JAM Member, Grade 11 &amp; 12</span></li>
-            <li><div class="ach-row"><strong>Founder &amp; Executor</strong><span class="ach-year">2023–24</span></div><span class="ach-desc">S.E.N.S.E Community Project</span></li>
-            <li><div class="ach-row"><strong>Coding &amp; Robotics Workshops</strong></div><span class="ach-desc">20+ students with Autism &amp; Down Syndrome</span></li>
-            <li><div class="ach-row"><strong>Mentored 200+ Students</strong></div><span class="ach-desc">From disadvantaged backgrounds</span></li>
+            <li><strong>Head Boy</strong><span>Grade 10 Student Council · 2022</span></li>
+            <li><strong>Head Captain</strong><span>Grade 12 Student Council · 2024</span></li>
+            <li><strong>Jamnabai Adolescent Mentor</strong><span>JAM · 2024</span></li>
+            <li><strong>S.E.N.S.E Founder &amp; Executor</strong><span>750K+ students reached · 2023–24</span></li>
+            <li><strong>Robotics Workshops</strong><span>20+ students with Autism &amp; Down Syndrome</span></li>
+            <li><strong>Mentored 200+ Students</strong><span>From disadvantaged backgrounds</span></li>
           </ul>
         </div>
 
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Contact</span>
-        <h2>Let's Connect</h2>
-        <p class="section-sub">I'm always open to new opportunities, collaborations, and conversations.</p>
-      </div>
-      <div class="contact-grid">
-        <a href="mailto:dheervpatel@gmail.com" class="contact-card">
-          <div class="contact-icon">✉</div>
-          <div>
-            <strong>Email</strong>
-            <span>dheervpatel@gmail.com</span>
-          </div>
+    <!-- ══ CONTACT ══ -->
+    <section id="contact">
+      <span class="sec-label">05 — Contact</span>
+      <h2 class="contact-h">Let's build<br /><em>something.</em></h2>
+      <div class="contact-list">
+        <a href="mailto:dheervpatel@gmail.com" class="contact-row">
+          <span class="c-label">Email</span>
+          <span class="c-val">dheervpatel@gmail.com</span>
         </a>
-        <a href="https://www.linkedin.com/in/dheer-patel-uiuc" target="_blank" rel="noopener" class="contact-card">
-          <div class="contact-icon">in</div>
-          <div>
-            <strong>LinkedIn</strong>
-            <span>linkedin.com/in/dheer-patel-uiuc</span>
-          </div>
+        <a href="https://www.linkedin.com/in/dheer-patel-uiuc" target="_blank" class="contact-row">
+          <span class="c-label">LinkedIn</span>
+          <span class="c-val">linkedin.com/in/dheer-patel-uiuc</span>
         </a>
-        <a href="tel:+919804079709" class="contact-card">
-          <div class="contact-icon">☎</div>
-          <div>
-            <strong>Phone</strong>
-            <span>+91 9804 079 709</span>
-          </div>
+        <a href="tel:+919804079709" class="contact-row">
+          <span class="c-label">Phone</span>
+          <span class="c-val">+91 9804 079 709</span>
         </a>
-        <div class="contact-card contact-location">
-          <div class="contact-icon">📍</div>
-          <div>
-            <strong>Location</strong>
-            <span>Urbana, Illinois, USA</span>
-          </div>
+        <div class="contact-row">
+          <span class="c-label">Location</span>
+          <span class="c-val">Urbana, Illinois, USA</span>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- FOOTER -->
+  </main>
+
   <footer>
-    <div class="container footer-inner">
-      <span>© 2026 Dheer Patel</span>
-      <span>Systems Engineering &amp; Design · UIUC</span>
-    </div>
+    <span>© 2026 Dheer Patel</span>
+    <span>Systems Engineering &amp; Design · UIUC</span>
   </footer>
 
-  <script src="main.js"></script>
+  <script>
+    // Cursor
+    const cur = document.getElementById('cursor');
+    const ring = document.getElementById('cursor-ring');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cur.style.left = mx + 'px'; cur.style.top = my + 'px';
+    });
+    (function loop() {
+      rx += (mx - rx) * 0.1; ry += (my - ry) * 0.1;
+      ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+      requestAnimationFrame(loop);
+    })();
+
+    // Fade-up
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); } });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.fade-up').forEach((el, i) => {
+      el.style.transitionDelay = `${(i % 5) * 70}ms`;
+      obs.observe(el);
+    });
+
+    // Sidebar active
+    const secs = document.querySelectorAll('section[id]');
+    const links = document.querySelectorAll('.s-nav a');
+    const sObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          links.forEach(l => l.classList.remove('active'));
+          const a = document.querySelector(`.s-nav a[href="#${e.target.id}"]`);
+          if (a) a.classList.add('active');
+        }
+      });
+    }, { threshold: 0.35 });
+    secs.forEach(s => sObs.observe(s));
+
+    // Mobile menu
+    const btn = document.getElementById('mob-btn');
+    const overlay = document.getElementById('mob-overlay');
+    btn.addEventListener('click', () => overlay.classList.toggle('open'));
+    document.querySelectorAll('.ml').forEach(l => l.addEventListener('click', () => overlay.classList.remove('open')));
+  </script>
 </body>
 </html>
