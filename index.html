@@ -590,6 +590,21 @@
       border: 1px solid var(--border);
       border-radius: 4px;
     }
+    .report-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-top: 14px;
+      padding: 8px 16px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      background: rgba(74,158,255,0.06);
+      border: 1px solid rgba(74,158,255,0.22);
+      border-radius: 100px;
+      transition: background .2s, border-color .2s, color .2s;
+    }
+    .report-btn:hover { background: rgba(74,158,255,0.14); border-color: rgba(74,158,255,0.45); color: #fff; }
 
     /* ══════════════════════════════════════
        ACHIEVEMENTS
@@ -727,6 +742,7 @@
 
       /* INHALYZE bar */
       .hero-inhalyze { overflow: visible; }
+      .hero-inhalyze::before { display: none; }
       .hi-top { flex-wrap: wrap; gap: 12px; }
       .hi-badges { flex-wrap: wrap; gap: 6px; width: 100%; }
       .hi-stage, .hi-badge { font-size: 0.6rem; padding: 5px 10px; }
@@ -1016,7 +1032,7 @@
           </div>
         </div>
 
-        <a href="Assets/Image Gravures Final Internship Doc.pdf" target="_blank" class="exp-row fade-up">
+        <div class="exp-row fade-up">
           <div class="exp-date">Jul 2024<br />1 month</div>
           <div class="exp-body">
             <h3>Systems Engineering Intern</h3>
@@ -1025,11 +1041,12 @@
               <li>Full manufacturing workflow — CNC machining, electroplating (Nickel &amp; Copper), laser engraving, chromium finishing</li>
               <li>Quality inspection, process monitoring, and comprehensive project report</li>
             </ul>
-            <div class="exp-tags"><span>Manufacturing</span><span>Quality Control</span><span>Process Optimization</span><span>Internship Study Report</span></div>
+            <div class="exp-tags"><span>Manufacturing</span><span>Quality Control</span><span>Process Optimization</span></div>
+            <a href="Assets/Image Gravures Final Internship Doc.pdf" target="_blank" class="report-btn">View Internship Study Report ↗</a>
           </div>
-        </a>
+        </div>
 
-        <a href="Assets/D. Parikh Engineering works Final Internship Doc.pdf" target="_blank" class="exp-row fade-up">
+        <div class="exp-row fade-up">
           <div class="exp-date">Jun – Jul 2024<br />2 months</div>
           <div class="exp-body">
             <h3>Mechanical Engineering Intern</h3>
@@ -1039,9 +1056,10 @@
               <li>Full process analysis — design, fabrication, welding, machining, assembly &amp; testing</li>
               <li>Research paper: "Manufacturing of Industrial Pharmaceutical Centrifuges"</li>
             </ul>
-            <div class="exp-tags"><span>Manufacturing Engineering</span><span>Quality Assurance</span><span>Published Research</span><span>Internship Study Report</span></div>
+            <div class="exp-tags"><span>Manufacturing Engineering</span><span>Quality Assurance</span><span>Published Research</span></div>
+            <a href="Assets/D. Parikh Engineering works Final Internship Doc.pdf" target="_blank" class="report-btn">View Internship Study Report ↗</a>
           </div>
-        </a>
+        </div>
 
       </div>
     </section>
