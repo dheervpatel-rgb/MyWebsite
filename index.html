@@ -25,6 +25,8 @@
       --border:     rgba(255,255,255,0.07);
       --sidebar-w:  230px;
       --radius:     16px;
+      --ease-out:   cubic-bezier(0.23, 1, 0.32, 1);
+      --ease-in-out:cubic-bezier(0.77, 0, 0.175, 1);
     }
 
     html { scroll-behavior: smooth; }
@@ -40,6 +42,27 @@
     a { color: inherit; text-decoration: none; }
     ul { list-style: none; }
 
+    /* ── Skip link ── */
+    .skip-link {
+      position: fixed; top: -100%; left: 50%;
+      transform: translateX(-50%);
+      background: var(--orange); color: #fff;
+      padding: 10px 20px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
+      border-radius: 0 0 8px 8px;
+      z-index: 99999;
+      transition: top 200ms var(--ease-out);
+    }
+    .skip-link:focus { top: 0; outline: none; }
+
+    /* ── Focus visible ── */
+    :focus-visible {
+      outline: 2px solid var(--orange);
+      outline-offset: 4px;
+      border-radius: 4px;
+    }
+
     /* ── Cursor ── */
     #cursor {
       position: fixed; z-index: 9999; pointer-events: none;
@@ -53,6 +76,16 @@
       width: 36px; height: 36px; border-radius: 50%;
       border: 1.5px solid rgba(255,95,5,.35);
       transform: translate(-50%,-50%);
+    }
+
+    /* ── Grain overlay — physical depth at near-zero opacity ── */
+    body::after {
+      content: '';
+      position: fixed; inset: 0; z-index: 9997; pointer-events: none;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 256px 256px;
     }
 
     /* ── Background orbs ── */
@@ -103,14 +136,14 @@
       text-transform: uppercase;
       padding: 8px 0;
       display: flex; align-items: center; gap: 10px;
-      transition: color .25s;
+      transition: color 150ms var(--ease-out);
       position: relative;
     }
     .s-nav a::before {
       content: '';
       width: 0; height: 1px;
       background: var(--orange);
-      transition: width .25s ease;
+      transition: width 200ms var(--ease-out);
       flex-shrink: 0;
     }
     .s-nav a:hover, .s-nav a.active { color: var(--text); }
@@ -122,9 +155,11 @@
       font-size: 0.68rem;
       color: var(--muted);
       letter-spacing: 0.04em;
-      transition: color .2s;
+      transition: color 150ms var(--ease-out);
     }
-    .s-footer a:hover { color: var(--orange); }
+    @media (hover: hover) and (pointer: fine) {
+      .s-footer a:hover { color: var(--orange); }
+    }
 
     /* ── Main ── */
     main { margin-left: var(--sidebar-w); position: relative; z-index: 1; }
@@ -196,24 +231,6 @@
     }
     .hero-descriptor strong { color: var(--text); font-weight: 500; }
 
-    .hero-chips {
-      display: flex; flex-wrap: wrap; gap: 8px;
-      margin-bottom: 40px;
-    }
-    .chip {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.07em;
-      text-transform: uppercase;
-      padding: 5px 12px;
-      border: 1px solid var(--glass-b);
-      border-radius: 100px;
-      color: var(--muted);
-      background: var(--glass);
-      transition: border-color .2s, color .2s;
-    }
-    .chip:hover { border-color: var(--orange); color: var(--text); }
-
     .hero-roles {
       display: flex; flex-direction: column; gap: 10px;
       margin-bottom: 28px;
@@ -221,10 +238,14 @@
     .hero-role {
       display: flex; align-items: center; gap: 12px;
     }
+    @keyframes dot-pulse {
+      0%, 100% { box-shadow: 0 0 6px var(--orange-glow); }
+      50% { box-shadow: 0 0 14px var(--orange-glow), 0 0 24px rgba(255,95,5,0.08); }
+    }
     .role-dot {
       width: 7px; height: 7px; border-radius: 50%;
       background: var(--orange); flex-shrink: 0;
-      box-shadow: 0 0 6px var(--orange-glow);
+      animation: dot-pulse 2.8s ease-in-out infinite;
     }
     .role-title {
       display: block;
@@ -245,10 +266,13 @@
       font-size: 0.82rem;
       font-weight: 500;
       border-radius: 100px;
-      transition: opacity .2s, transform .2s;
+      transition: opacity 150ms var(--ease-out), transform 150ms var(--ease-out);
       letter-spacing: 0.02em;
     }
-    .btn-primary:hover { opacity: .88; transform: translateY(-1px); }
+    @media (hover: hover) and (pointer: fine) {
+      .btn-primary:hover { opacity: .88; transform: translateY(-1px); }
+    }
+    .btn-primary:active { transform: scale(0.97); opacity: 1; }
     .btn-ghost {
       font-family: 'DM Mono', monospace;
       font-size: 0.65rem;
@@ -256,9 +280,11 @@
       color: var(--muted);
       text-transform: uppercase;
       display: flex; align-items: center; gap: 6px;
-      transition: color .2s;
+      transition: color 150ms var(--ease-out);
     }
-    .btn-ghost:hover { color: var(--text); }
+    @media (hover: hover) and (pointer: fine) {
+      .btn-ghost:hover { color: var(--text); }
+    }
     .btn-ghost::after { content: '↓'; }
     .btn-resume {
       padding: 11px 24px;
@@ -269,9 +295,12 @@
       letter-spacing: 0.06em;
       color: var(--text);
       background: var(--glass);
-      transition: border-color .2s, background .2s;
+      transition: border-color 150ms var(--ease-out), background 150ms var(--ease-out), transform 150ms var(--ease-out);
     }
-    .btn-resume:hover { border-color: var(--orange); background: rgba(255,95,5,0.08); }
+    @media (hover: hover) and (pointer: fine) {
+      .btn-resume:hover { border-color: var(--orange); background: rgba(255,95,5,0.08); }
+    }
+    .btn-resume:active { transform: scale(0.97); }
 
     /* Hero right — portrait */
     .hero-portrait {
@@ -415,28 +444,13 @@
     }
     .about-body p strong { color: var(--text); font-weight: 500; }
 
-    .skill-wrap { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
-    .skill {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.58rem;
-      letter-spacing: 0.07em;
-      text-transform: uppercase;
-      padding: 5px 12px;
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      color: var(--muted);
-      transition: border-color .2s, color .2s;
-    }
-    .skill:hover { border-color: var(--orange); color: var(--text); }
-
     .edu-stack { display: flex; flex-direction: column; gap: 24px; }
     .edu-card {
       padding: 20px 24px;
       background: var(--glass);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      border-left: 2px solid transparent;
-      transition: border-color .25s, background .25s;
+      transition: border-color 180ms var(--ease-out), background 180ms var(--ease-out);
       display: flex; align-items: flex-start; gap: 16px;
     }
     .edu-logo {
@@ -448,7 +462,9 @@
     }
     .edu-logo img { width: 100%; height: 100%; object-fit: contain; }
     .edu-card-body { flex: 1; }
-    .edu-card:hover { border-left-color: var(--orange); background: rgba(255,95,5,0.04); }
+    @media (hover: hover) and (pointer: fine) {
+      .edu-card:hover { border-color: rgba(255,95,5,0.3); background: rgba(255,95,5,0.04); }
+    }
     .edu-card-body strong { display: block; font-size: 0.9rem; font-weight: 500; margin-bottom: 4px; }
     .edu-card-body > span {
       display: block;
@@ -480,6 +496,7 @@
     ══════════════════════════════════════ */
     .proj-list { display: flex; flex-direction: column; }
     .proj-row {
+      --mx: 50%; --my: 50%;
       display: grid;
       grid-template-columns: 44px 1fr 28px;
       gap: 28px;
@@ -487,10 +504,18 @@
       padding: 36px 0;
       border-bottom: 1px solid var(--border);
       cursor: default;
-      transition: background .2s;
+      transition: background 180ms var(--ease-out);
     }
     .proj-row:first-child { border-top: 1px solid var(--border); }
-    .proj-row:hover { background: rgba(255,255,255,0.015); margin: 0 -16px; padding-left: 16px; padding-right: 16px; border-radius: 12px; border-color: transparent; }
+    @media (hover: hover) and (pointer: fine) {
+      .proj-row:hover {
+        background: radial-gradient(360px circle at var(--mx) var(--my), rgba(255,95,5,0.05), transparent 70%),
+                    rgba(255,255,255,0.012);
+        margin: 0 -16px; padding-left: 16px; padding-right: 16px; border-radius: 12px; border-color: transparent;
+      }
+      .proj-row:hover .proj-body h3 { color: var(--orange); }
+      .proj-row:hover .proj-arrow { color: var(--orange); opacity: 1; transform: translate(3px,-3px); }
+    }
 
     .proj-n {
       font-family: 'DM Mono', monospace;
@@ -504,9 +529,8 @@
       font-size: 1.4rem;
       letter-spacing: -0.02em;
       margin-bottom: 10px;
-      transition: color .2s;
+      transition: color 150ms var(--ease-out);
     }
-    .proj-row:hover .proj-body h3 { color: var(--orange); }
 
     .proj-body p {
       font-size: 0.85rem;
@@ -532,10 +556,9 @@
       font-size: 1.1rem;
       color: var(--muted);
       opacity: 0.4;
-      transition: color .2s, transform .2s, opacity .2s;
+      transition: color 150ms var(--ease-out), transform 150ms var(--ease-out), opacity 150ms var(--ease-out);
       padding-top: 4px;
     }
-    .proj-row:hover .proj-arrow { color: var(--orange); opacity: 1; transform: translate(3px,-3px); }
 
     /* ══════════════════════════════════════
        EXPERIENCE
@@ -602,9 +625,12 @@
       background: rgba(74,158,255,0.06);
       border: 1px solid rgba(74,158,255,0.22);
       border-radius: 100px;
-      transition: background .2s, border-color .2s, color .2s;
+      transition: background 150ms var(--ease-out), border-color 150ms var(--ease-out), color 150ms var(--ease-out), transform 150ms var(--ease-out);
     }
-    .report-btn:hover { background: rgba(74,158,255,0.14); border-color: rgba(74,158,255,0.45); color: #fff; }
+    @media (hover: hover) and (pointer: fine) {
+      .report-btn:hover { background: rgba(74,158,255,0.14); border-color: rgba(74,158,255,0.45); color: #fff; }
+    }
+    .report-btn:active { transform: scale(0.97); }
 
     /* ══════════════════════════════════════
        ACHIEVEMENTS
@@ -656,10 +682,13 @@
       padding: 18px 0;
       border-bottom: 1px solid var(--border);
       align-items: center;
-      transition: background .2s;
+      transition: background 180ms var(--ease-out);
     }
     .contact-row:first-child { border-top: 1px solid var(--border); }
-    a.contact-row:hover { background: rgba(255,95,5,0.04); margin: 0 -16px; padding-left: 16px; padding-right: 16px; border-radius: 10px; border-color: transparent; }
+    @media (hover: hover) and (pointer: fine) {
+      a.contact-row:hover { background: rgba(255,95,5,0.04); margin: 0 -16px; padding-left: 16px; padding-right: 16px; border-radius: 10px; border-color: transparent; }
+      a.contact-row:hover .c-val { color: var(--orange); }
+    }
 
     .c-label {
       font-family: 'DM Mono', monospace;
@@ -668,11 +697,11 @@
       letter-spacing: 0.09em;
       text-transform: uppercase;
     }
-    .c-val { font-size: 0.92rem; color: var(--text); transition: color .2s; }
-    a.contact-row:hover .c-val { color: var(--orange); }
+    .c-val { font-size: 0.92rem; color: var(--text); transition: color 150ms var(--ease-out); }
 
     /* ── Footer ── */
     footer {
+      margin-left: var(--sidebar-w);
       padding: 28px 72px;
       display: flex;
       justify-content: space-between;
@@ -685,6 +714,20 @@
       color: var(--muted);
       letter-spacing: 0.06em;
     }
+
+    /* ── Hero entrance ── */
+    @keyframes hero-in {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-eyebrow     { animation: hero-in 0.7s var(--ease-out) 0.05s both; }
+    .hero-name        { animation: hero-in 0.8s var(--ease-out) 0.15s both; }
+    .hero-descriptor  { animation: hero-in 0.7s var(--ease-out) 0.28s both; }
+    .hero-roles       { animation: hero-in 0.7s var(--ease-out) 0.38s both; }
+    .hero-ctas        { animation: hero-in 0.7s var(--ease-out) 0.48s both; }
+    .hero-portrait    { animation: hero-in 0.85s var(--ease-out) 0.2s both; }
+    .hi-header        { animation: hero-in 0.7s var(--ease-out) 0.58s both; }
+    .hero-inhalyze    { animation: hero-in 0.7s var(--ease-out) 0.65s both; }
 
     /* ── Animations ── */
     .fade-up {
@@ -708,16 +751,99 @@
     #mob-btn { background: none; border: none; cursor: none; display: flex; flex-direction: column; gap: 5px; }
     #mob-btn span { display: block; width: 22px; height: 1px; background: var(--text); transition: transform .3s, opacity .3s; }
     .mob-overlay {
-      display: none; position: fixed; inset: 0;
+      position: fixed; inset: 0;
       background: var(--bg); z-index: 150;
-      flex-direction: column; justify-content: center; align-items: center; gap: 28px;
+      display: flex; flex-direction: column;
+      padding: 88px 32px 48px;
+      opacity: 0; pointer-events: none;
+      transition: opacity 280ms var(--ease-out);
     }
-    .mob-overlay.open { display: flex; }
-    .mob-overlay a { font-family: 'DM Serif Display', serif; font-size: 2.2rem; letter-spacing: -0.02em; }
+    .mob-overlay.open { opacity: 1; pointer-events: auto; }
+
+    /* Nav links */
+    .mob-nav { display: flex; flex-direction: column; flex: 1; justify-content: center; }
+    .mob-nav a {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 9vw, 2.4rem);
+      letter-spacing: -0.02em;
+      color: var(--muted);
+      display: flex; align-items: baseline; gap: 14px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+      transform: translateY(16px); opacity: 0;
+      transition: transform 400ms var(--ease-out), opacity 400ms var(--ease-out), color 150ms var(--ease-out);
+    }
+    .mob-nav a:first-child { border-top: 1px solid var(--border); }
+    .mob-overlay.open .mob-nav a { transform: translateY(0); opacity: 1; }
+    .mob-overlay.open .mob-nav a:nth-child(1) { transition-delay: 50ms; }
+    .mob-overlay.open .mob-nav a:nth-child(2) { transition-delay: 100ms; }
+    .mob-overlay.open .mob-nav a:nth-child(3) { transition-delay: 150ms; }
+    .mob-overlay.open .mob-nav a:nth-child(4) { transition-delay: 200ms; }
+    .mob-overlay.open .mob-nav a:nth-child(5) { transition-delay: 250ms; }
+    @media (hover: hover) and (pointer: fine) {
+      .mob-nav a:hover { color: var(--text); }
+    }
+    .mob-nav a:active { color: var(--orange); transform: scale(0.98) translateY(0); }
+
+    .mob-n {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem; letter-spacing: 0.1em;
+      color: var(--orange); flex-shrink: 0;
+    }
+
+    /* Menu footer */
+    .mob-footer {
+      display: flex; flex-direction: column; gap: 20px;
+      padding-top: 32px;
+      opacity: 0;
+      transition: opacity 350ms var(--ease-out) 300ms;
+    }
+    .mob-overlay.open .mob-footer { opacity: 1; }
+    .mob-resume-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 22px;
+      border: 1px solid var(--glass-b);
+      border-radius: 100px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem; letter-spacing: 0.06em;
+      color: var(--text); background: var(--glass);
+      width: fit-content;
+      transition: border-color 150ms var(--ease-out);
+    }
+    .mob-resume-link:active { transform: scale(0.97); }
+    .mob-socials {
+      display: flex; gap: 24px;
+    }
+    .mob-socials a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem; letter-spacing: 0.06em;
+      color: var(--muted);
+      transition: color 150ms var(--ease-out);
+    }
+    .mob-socials a:active { color: var(--orange); }
+
+    /* Hamburger → X */
+    #mob-btn span { transition: transform 300ms var(--ease-out), opacity 200ms; }
+    #mob-btn.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    #mob-btn.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    #mob-btn.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
     @media (pointer: coarse) {
       #cursor, #cursor-ring { display: none !important; }
       body { cursor: auto; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .fade-up { transition: opacity 0.3s ease; transform: none; }
+      .orb { animation: none; }
+      .btn-primary, .btn-resume, .report-btn { transition: opacity 0.15s ease, background 0.15s ease; }
+      .hero-eyebrow, .hero-name, .hero-descriptor, .hero-roles,
+      .hero-ctas, .hero-portrait, .hi-header, .hero-inhalyze {
+        animation: none; opacity: 1;
+      }
+      .mob-overlay a { transition: none; transform: none; opacity: 1; }
+      #mob-btn span { transition: none; }
+      .role-dot { animation: none; }
     }
 
     @media (max-width: 960px) {
@@ -725,7 +851,7 @@
       #mob-bar { display: flex; }
       main { margin-left: 0; }
       section { padding: 56px 20px; }
-      footer { padding: 20px 24px; }
+      footer { padding: 20px 24px; margin-left: 0; }
 
       /* Hero */
       #hero { padding: 80px 20px 48px; }
@@ -760,18 +886,22 @@
       .proj-body p { font-size: 0.8rem; }
 
       /* Experience */
-      .exp-row { grid-template-columns: 1fr; gap: 4px; }
+      .exp-row { grid-template-columns: 1fr; gap: 0; padding: 28px 0; }
+      .exp-date { font-size: 0.58rem; letter-spacing: 0.08em; color: var(--orange); margin-bottom: 10px; padding-top: 0; }
 
       /* Achievements */
       .ach-cols { grid-template-columns: 1fr; gap: 32px; }
 
       /* Contact */
       .contact-h { font-size: clamp(32px, 9vw, 52px); }
-      .c-val { font-size: 0.9rem; word-break: break-all; }
+      .contact-row { grid-template-columns: 76px 1fr; gap: 16px; }
+      .c-val { font-size: 0.88rem; overflow-wrap: break-word; word-break: break-word; }
     }
   </style>
 </head>
 <body>
+
+  <a href="#about" class="skip-link">Skip to content</a>
 
   <div id="cursor"></div>
   <div id="cursor-ring"></div>
@@ -788,11 +918,20 @@
     <button id="mob-btn" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
   <div class="mob-overlay" id="mob-overlay">
-    <a href="#about" class="ml">About</a>
-    <a href="#projects" class="ml">Projects</a>
-    <a href="#experience" class="ml">Experience</a>
-    <a href="#achievements" class="ml">Achievements</a>
-    <a href="#contact" class="ml">Contact</a>
+    <nav class="mob-nav">
+      <a href="#about" class="ml"><span class="mob-n">01</span>About</a>
+      <a href="#projects" class="ml"><span class="mob-n">02</span>Projects</a>
+      <a href="#experience" class="ml"><span class="mob-n">03</span>Experience</a>
+      <a href="#achievements" class="ml"><span class="mob-n">04</span>Achievements</a>
+      <a href="#contact" class="ml"><span class="mob-n">05</span>Contact</a>
+    </nav>
+    <div class="mob-footer">
+      <a href="Assets/Dheer Patel Resume.pdf" target="_blank" rel="noopener noreferrer" class="mob-resume-link">Resume ↗</a>
+      <div class="mob-socials">
+        <a href="mailto:dheervpatel@gmail.com">dheervpatel@gmail.com</a>
+        <a href="https://linkedin.com/in/dheer-patel-uiuc" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+      </div>
+    </div>
   </div>
 
   <!-- Sidebar -->
@@ -810,7 +949,7 @@
     </nav>
     <div class="s-footer">
       <a href="mailto:dheervpatel@gmail.com">dheervpatel@gmail.com</a>
-      <a href="https://linkedin.com/in/dheer-patel-uiuc" target="_blank">LinkedIn ↗</a>
+      <a href="https://linkedin.com/in/dheer-patel-uiuc" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
       <a href="https://dheerpatel.com">dheerpatel.com</a>
     </div>
   </aside>
@@ -821,7 +960,7 @@
     <section id="hero">
       <div class="hero-top">
         <div>
-          <p class="hero-eyebrow">Systems Engineer &amp; Entrepreneur · Urbana, Illinois</p>
+          <p class="hero-eyebrow">Systems Engineer &amp; Entrepreneur · Champaign, Illinois</p>
           <h1 class="hero-name">
             Dheer<br />
             <span class="line2">Patel.</span>
@@ -913,7 +1052,7 @@
         <div class="edu-stack">
           <div class="edu-card fade-up">
             <div class="edu-logo">
-              <img src="Assets/uiuc logo.png" alt="UIUC" />
+              <img src="Assets/uiuc logo.png" alt="UIUC" loading="lazy" />
             </div>
             <div class="edu-card-body">
               <strong>University of Illinois Urbana-Champaign</strong>
@@ -927,7 +1066,7 @@
           </div>
           <div class="edu-card fade-up">
             <div class="edu-logo">
-              <img src="Assets/image.png" alt="JNIS" />
+              <img src="Assets/image.png" alt="JNIS" loading="lazy" />
             </div>
             <div class="edu-card-body">
               <strong>Jamnabai Narsee International School</strong>
@@ -941,7 +1080,7 @@
           </div>
           <div class="edu-card fade-up">
             <div class="edu-logo">
-              <img src="Assets/jns logo.png" alt="JNS" />
+              <img src="Assets/jns logo.png" alt="JNS" loading="lazy" />
             </div>
             <div class="edu-card-body">
               <strong>Jamnabai Narsee School</strong>
@@ -977,7 +1116,7 @@
             </div>
             <a href="Assets/Inhalyze - Dheer Patel.pdf" target="_blank" class="report-btn">View INHALYZE Report ↗</a>
           </div>
-          <span class="proj-arrow"></span>
+          <span class="proj-arrow">↗</span>
         </div>
 
         <div class="proj-row fade-up">
@@ -1072,7 +1211,7 @@
     </section>
 
     <!-- ══ ACHIEVEMENTS ══ -->
-    <section id="achievements" style="padding-top:64px;">
+    <section id="achievements">
       <span class="sec-label">04 — Achievements</span>
       <div class="ach-cols">
 
@@ -1124,17 +1263,17 @@
           <span class="c-label">Email</span>
           <span class="c-val">dheervpatel@gmail.com</span>
         </a>
-        <a href="https://www.linkedin.com/in/dheer-patel-uiuc" target="_blank" class="contact-row">
+        <a href="https://www.linkedin.com/in/dheer-patel-uiuc" target="_blank" rel="noopener noreferrer" class="contact-row">
           <span class="c-label">LinkedIn</span>
           <span class="c-val">linkedin.com/in/dheer-patel-uiuc</span>
         </a>
-        <a href="tel:+919804079709" class="contact-row">
+        <a href="tel:+19804079709" class="contact-row">
           <span class="c-label">Phone</span>
-          <span class="c-val">+91 9804 079 709</span>
+          <span class="c-val">+1 (980) 407-9709</span>
         </a>
         <div class="contact-row">
           <span class="c-label">Location</span>
-          <span class="c-val">Urbana, Illinois, USA</span>
+          <span class="c-val">Champaign, Illinois, USA</span>
         </div>
       </div>
     </section>
@@ -1161,13 +1300,15 @@
       requestAnimationFrame(loop);
     })();
 
-    // Fade-up
+    // Fade-up (stagger resets per section so mid-page elements don't wait 350ms+)
     const obs = new IntersectionObserver(entries => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('vis'); obs.unobserve(e.target); } });
     }, { threshold: 0.08 });
-    document.querySelectorAll('.fade-up').forEach((el, i) => {
-      el.style.transitionDelay = `${(i % 5) * 70}ms`;
-      obs.observe(el);
+    document.querySelectorAll('section').forEach(sec => {
+      sec.querySelectorAll('.fade-up').forEach((el, i) => {
+        el.style.transitionDelay = `${Math.min(i, 4) * 80}ms`;
+        obs.observe(el);
+      });
     });
 
     // Sidebar active
@@ -1184,11 +1325,26 @@
     }, { threshold: 0.35 });
     secs.forEach(s => sObs.observe(s));
 
+    // Proj-row cursor spotlight
+    document.querySelectorAll('.proj-row').forEach(row => {
+      row.addEventListener('mousemove', e => {
+        const r = row.getBoundingClientRect();
+        row.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100).toFixed(1) + '%');
+        row.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100).toFixed(1) + '%');
+      });
+    });
+
     // Mobile menu
     const btn = document.getElementById('mob-btn');
     const overlay = document.getElementById('mob-overlay');
-    btn.addEventListener('click', () => overlay.classList.toggle('open'));
-    document.querySelectorAll('.ml').forEach(l => l.addEventListener('click', () => overlay.classList.remove('open')));
+    btn.addEventListener('click', () => {
+      overlay.classList.toggle('open');
+      btn.classList.toggle('open');
+    });
+    document.querySelectorAll('.ml').forEach(l => l.addEventListener('click', () => {
+      overlay.classList.remove('open');
+      btn.classList.remove('open');
+    }));
   </script>
 </body>
 </html>
